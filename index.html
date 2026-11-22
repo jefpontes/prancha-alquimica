@@ -591,39 +591,93 @@
 
     <svg id="pranchaSvg" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg" aria-label="Prancha Alquímica de 7 Domínios e 21 Cavidades">
       <defs>
-        <radialGradient id="gradEmpty" cx="35%" cy="30%" r="70%">
-          <stop offset="0%" stop-color="#261d16" />
-          <stop offset="100%" stop-color="#0b0806" />
-        </radialGradient>
         <radialGradient id="gradGold" cx="35%" cy="30%" r="70%">
-          <stop offset="0%" stop-color="#fff6c2" />
+          <stop offset="0%" stop-color="#fff4b8" />
           <stop offset="55%" stop-color="#d4af37" />
-          <stop offset="100%" stop-color="#7a5b11" />
+          <stop offset="100%" stop-color="#7a5c12" />
         </radialGradient>
         <radialGradient id="gradSilver" cx="35%" cy="30%" r="70%">
           <stop offset="0%" stop-color="#ffffff" />
           <stop offset="55%" stop-color="#b8c2cc" />
-          <stop offset="100%" stop-color="#52606d" />
+          <stop offset="100%" stop-color="#525c66" />
         </radialGradient>
         <radialGradient id="gradIron" cx="35%" cy="30%" r="70%">
           <stop offset="0%" stop-color="#6b645e" />
-          <stop offset="55%" stop-color="#2a2624" />
-          <stop offset="100%" stop-color="#0d0b0a" />
+          <stop offset="50%" stop-color="#262220" />
+          <stop offset="100%" stop-color="#0a0908" />
+        </radialGradient>
+        <radialGradient id="gradEmpty" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#0d0a08" />
+          <stop offset="100%" stop-color="#1c1510" />
+        </radialGradient>
+        <radialGradient id="gradEther" cx="45%" cy="40%" r="65%">
+          <stop offset="0%" stop-color="#2e2318" />
+          <stop offset="65%" stop-color="#17110c" />
+          <stop offset="100%" stop-color="#0a0806" />
         </radialGradient>
       </defs>
 
-      <!-- Moldura externa da prancha -->
-      <circle cx="340" cy="315" r="270" fill="none" stroke="#3d2d1a" stroke-width="1.5" />
-      <circle cx="340" cy="315" r="262" fill="none" stroke="#5c4628" stroke-width="1" stroke-dasharray="2,6" />
+      <!-- Moldura Dupla da Prancha -->
+      <rect x="10" y="10" width="660" height="660" rx="10" fill="#17120e" stroke="#6e5430" stroke-width="3" />
+      <rect x="26" y="26" width="628" height="628" rx="6" fill="none" stroke="#4a371f" stroke-width="1.5" />
 
-      <!-- Núcleo central (IGF em tempo real) -->
-      <circle cx="340" cy="315" r="58" fill="#120e0b" stroke="#d4af37" stroke-width="1.8" />
-      <circle cx="340" cy="315" r="50" fill="none" stroke="#5c4628" stroke-width="1" stroke-dasharray="3,3" />
-      <text x="340" y="301" fill="#a6998a" font-size="9" font-weight="bold" letter-spacing="1.5" text-anchor="middle">IGF TOTAL</text>
-      <text id="centerScoreText" x="340" y="325" fill="#f3d576" font-size="20" font-weight="800" text-anchor="middle">0/42</text>
+      <!-- 4 ELEMENTOS NOS CANTOS DA PRANCHA (Símbolos Alquímicos Puros) -->
+      <!-- Superior Esquerdo: AR (Triângulo para cima com linha horizontal) -->
+      <g transform="translate(42, 42)">
+        <rect width="54" height="54" rx="4" fill="#0f0c09" stroke="#d4af37" stroke-width="2" />
+        <polygon points="27,11 43,40 11,40" fill="none" stroke="#f3d576" stroke-width="2.2" />
+        <line x1="15" y1="26" x2="39" y2="26" stroke="#f3d576" stroke-width="2.2" />
+      </g>
 
-      <!-- Camada dinâmica dos 7 domínios e 21 cavidades -->
+      <!-- Superior Direito: FOGO (Triângulo apontando para cima) -->
+      <g transform="translate(584, 42)">
+        <rect width="54" height="54" rx="4" fill="#0f0c09" stroke="#d4af37" stroke-width="2" />
+        <polygon points="27,11 43,40 11,40" fill="none" stroke="#f3d576" stroke-width="2.2" />
+      </g>
+
+      <!-- Inferior Esquerdo: ÁGUA (Triângulo apontando para baixo) -->
+      <g transform="translate(42, 584)">
+        <rect width="54" height="54" rx="4" fill="#0f0c09" stroke="#d4af37" stroke-width="2" />
+        <polygon points="27,43 43,14 11,14" fill="none" stroke="#f3d576" stroke-width="2.2" />
+      </g>
+
+      <!-- Inferior Direito: TERRA (Triângulo para baixo com linha horizontal) -->
+      <g transform="translate(584, 584)">
+        <rect width="54" height="54" rx="4" fill="#0f0c09" stroke="#d4af37" stroke-width="2" />
+        <polygon points="27,43 43,14 11,14" fill="none" stroke="#f3d576" stroke-width="2.2" />
+        <line x1="15" y1="28" x2="39" y2="28" stroke="#f3d576" stroke-width="2.2" />
+      </g>
+
+      <!-- Núcleo Central: 5º Elemento • Éter (Corpo Soberano) -->
+      <circle cx="340" cy="315" r="56" fill="url(#gradEther)" stroke="#d4af37" stroke-width="2.2" />
+      <circle cx="340" cy="315" r="49" fill="none" stroke="#d4af37" stroke-width="0.8" stroke-dasharray="3,3" />
+      <polygon points="340,270 379,337 301,337" fill="none" stroke="#d4af37" stroke-width="0.6" opacity="0.28" />
+      <polygon points="340,360 379,293 301,293" fill="none" stroke="#d4af37" stroke-width="0.6" opacity="0.28" />
+      <text x="340" y="293" fill="#d4af37" font-size="8.5" font-weight="bold" text-anchor="middle" letter-spacing="1.2">IGF TOTAL</text>
+      <text id="centerScoreText" x="340" y="319" fill="#f3d576" font-size="22" font-weight="800" text-anchor="middle">0/42</text>
+
+      <!-- Camada Dinâmica dos 7 Domínios e 21 Cavidades -->
       <g id="orbitLayer"></g>
+
+      <!-- 3 Tigelas Inferiores: Enxofre (0), Mercúrio (1) e Sal (2) -->
+      <g transform="translate(210, 610)">
+        <circle cx="0" cy="0" r="28" fill="#0f0c09" stroke="#d4af37" stroke-width="1.8" />
+        <polygon points="0,-15 10,2 -10,2" fill="none" stroke="#d4af37" stroke-width="1.5" />
+        <line x1="0" y1="2" x2="0" y2="15" stroke="#d4af37" stroke-width="1.5" />
+        <line x1="-6" y1="8.5" x2="6" y2="8.5" stroke="#d4af37" stroke-width="1.5" />
+      </g>
+      <g transform="translate(340, 610)">
+        <circle cx="0" cy="0" r="28" fill="#0f0c09" stroke="#b8c2cc" stroke-width="1.8" />
+        <circle cx="0" cy="-3" r="7" fill="none" stroke="#b8c2cc" stroke-width="1.5" />
+        <path d="M -7,-12 A 7,7 0 0,0 7,-12" fill="none" stroke="#b8c2cc" stroke-width="1.5" />
+        <line x1="0" y1="4" x2="0" y2="16" stroke="#b8c2cc" stroke-width="1.5" />
+        <line x1="-6" y1="10.5" x2="6" y2="10.5" stroke="#b8c2cc" stroke-width="1.5" />
+      </g>
+      <g transform="translate(470, 610)">
+        <circle cx="0" cy="0" r="28" fill="#0f0c09" stroke="#8a817c" stroke-width="1.8" />
+        <circle cx="0" cy="0" r="11" fill="none" stroke="#a6998a" stroke-width="1.5" />
+        <line x1="-11" y1="0" x2="11" y2="0" stroke="#a6998a" stroke-width="1.5" />
+      </g>
     </svg>
 
     <!-- Legenda das Esferas -->
