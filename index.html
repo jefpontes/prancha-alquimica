@@ -364,6 +364,11 @@
       margin-bottom: 14px;
     }
 
+    .hero-block.lever-block {
+      border-left-color: var(--silver);
+      background: rgba(203, 213, 225, 0.06);
+    }
+
     .hero-block.action-block {
       border-left-color: var(--gold);
       background: rgba(212, 175, 55, 0.08);
@@ -411,6 +416,7 @@
       border: 1px solid var(--border-brass);
       border-radius: 10px;
       padding: 18px;
+      margin-bottom: 20px;
     }
 
     details.lab-report summary {
@@ -454,10 +460,11 @@
 
     .strip-box {
       background: #0d0a08;
-      border: 1px solid #382a18;
-      padding: 12px;
-      border-radius: 6px;
+      border: 1px solid var(--gold);
+      padding: 14px;
+      border-radius: 8px;
       text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
     }
 
     .strip-box span {
@@ -465,11 +472,13 @@
       font-size: 0.72rem;
       color: var(--text-muted);
       text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 4px;
     }
 
     .strip-box strong {
-      font-size: 1.15rem;
-      color: var(--gold);
+      font-size: 1.25rem;
+      color: var(--gold-light);
       word-break: break-word;
     }
 
@@ -497,7 +506,7 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
       font-size: 0.9rem;
       color: #e6dfd5;
     }
@@ -510,6 +519,11 @@
     .lab-list li.chaos-li { border-left-color: var(--chaos-alert); }
     .lab-list li.inert-li { border-left-color: var(--silver); }
     .lab-list li.gold-li { border-left-color: var(--gold); }
+
+    .final-copy-bar {
+      text-align: center;
+      margin-top: 22px;
+    }
 
     .status-0 { color: #f3d576; border-color: #d4af37; }
     .status-1 { color: #e2e8f0; border-color: #94a3b8; }
@@ -697,26 +711,46 @@
     </div>
   </div>
 
-  <!-- Cartões de Perguntas dos 7 Domínios -->
+  <!-- Container Dinâmico dos 7 Domínios e 21 Perguntas -->
   <div id="questionsContainer"></div>
 
-  <!-- Botão Principal de Laudo de Prioridade -->
+  <!-- Botão Principal de Laudo Sistêmico -->
   <div style="text-align: center; margin-top: 24px;">
     <button class="btn" style="padding: 14px 32px; font-size: 1rem;" onclick="generateReport()">
-      Gerar Laudo de Prioridade &amp; Exame
+      Gerar Laudo Sistêmico &amp; Exame
     </button>
   </div>
 
-  <!-- Painel Estilo Exame Médico (Frente: Alvo Prioritário | Verso: Exame Técnico) -->
+  <!-- Painel Estilo Exame Sistêmico -->
   <div class="results-section" id="resultsSection">
+    <div class="metrics-strip">
+      <div class="strip-box">
+        <span>Pontuação Bruta (IGF)</span>
+        <strong id="igfScore">0 / 42 pts</strong>
+      </div>
+      <div class="strip-box">
+        <span>Densidade Real (Com Atritos)</span>
+        <strong id="densityPercent">0%</strong>
+      </div>
+      <div class="strip-box">
+        <span>Assinatura da Matriz</span>
+        <strong id="matrixSignature" style="font-family: monospace; font-size: 0.92rem;">000-000-000-000-000-000-000</strong>
+      </div>
+    </div>
+
     <div class="exam-hero-card" id="heroCard">
       <div class="urgency-pill" id="urgencyBadge">🚨 URGÊNCIA • ESTADO DE CAOS PRIORITÁRIO</div>
       <div class="hero-domain-title" id="heroTitle">—</div>
       <div class="hero-subtitle" id="heroSubtitle">—</div>
 
       <div class="hero-block">
-        <div class="hero-block-label">Por que sua vida está travando aqui:</div>
+        <div class="hero-block-label">Diagnóstico Universal (Relações, Saúde, Direção e Matéria):</div>
         <div class="hero-block-text" id="heroWhy">—</div>
+      </div>
+
+      <div class="hero-block lever-block">
+        <div class="hero-block-label">Dinâmica Interna &amp; Ponto de Alavancagem:</div>
+        <div class="hero-block-text" id="heroLever">—</div>
       </div>
 
       <div class="hero-block action-block">
@@ -727,43 +761,22 @@
       <div class="hero-question" id="heroQuestion">—</div>
     </div>
 
-    <!-- Ações Rápidas do Operador -->
-    <div class="quick-actions">
-      <button class="btn" onclick="copyPriorityCard()">Copiar Resumo + Ação (WhatsApp)</button>
-      <button class="btn btn-secondary" onclick="copyForNotebookLM()">Copiar Exame Completo (NotebookLM)</button>
-    </div>
-
     <!-- Verso do Exame (Gaveta Técnica Recolhível) -->
     <details class="lab-report">
       <summary>
-        <span>📋 Ver Exame Técnico Completo (Outros Domínios, Cruzamentos e Pontes)</span>
+        <span>📋 Ver Exame Sistêmico Completo (Tríades, Cruzamentos e Todos os Domínios)</span>
         <span class="chevron">▼</span>
       </summary>
 
       <div class="lab-content">
-        <div class="metrics-strip">
-          <div class="strip-box">
-            <span>Pontuação Bruta (IGF)</span>
-            <strong id="igfScore">0 / 42 pts</strong>
-          </div>
-          <div class="strip-box">
-            <span>Densidade Real (Com Atritos)</span>
-            <strong id="densityPercent">0%</strong>
-          </div>
-          <div class="strip-box">
-            <span>Assinatura da Matriz</span>
-            <strong id="matrixSignature" style="font-family: monospace; font-size: 0.92rem;">000-000-000-000-000-000-000</strong>
-          </div>
+        <div class="lab-section" id="labTriadsBox" style="display: none;">
+          <h4>🌐 Cruzamento Holístico (Tríades Sistêmicas do Organismo)</h4>
+          <ul class="lab-list" id="labTriadsList"></ul>
         </div>
 
         <div class="lab-section" id="labContradictionsBox" style="display: none;">
           <h4>⚠️ Incoerências Detectadas (Checagem Cruzada)</h4>
           <ul class="lab-list" id="labContradictionsList"></ul>
-        </div>
-
-        <div class="lab-section" id="labBridgesBox" style="display: none;">
-          <h4>🔗 Pontes de Contaminação Ativas</h4>
-          <ul class="lab-list" id="labBridgesList"></ul>
         </div>
 
         <div class="lab-section">
@@ -772,11 +785,18 @@
         </div>
 
         <div class="lab-section">
-          <h4>Mapa Geral dos 7 Domínios (Exame Detalhado)</h4>
+          <h4>Leitura Individual &amp; Microdinâmica dos 7 Domínios</h4>
           <ul class="lab-list" id="labAllDomainsList"></ul>
         </div>
       </div>
     </details>
+
+    <!-- Botão Unificado de Cópia -->
+    <div class="final-copy-bar">
+      <button class="btn" style="padding: 12px 24px;" onclick="copyUnifiedReport()">
+        Copiar Laudo e Exame Completo (WhatsApp / NotebookLM)
+      </button>
+    </div>
   </div>
 
 </div>
@@ -792,12 +812,12 @@
     1: { chaos: "você trava e calcula cenários demais antes de dar o primeiro passo", inert: "hesita mais do que deveria antes de agir", power: "decide rápido sem ficar preso em dúvidas" },
     2: { chaos: "carrega remorso e fica remoendo as escolhas que já fez", inert: "duvida se escolheu certo logo depois de decidir", power: "assume suas escolhas com firmeza" },
     3: { chaos: "sua mente entra em névoa justamente nas horas mais decisivas", inert: "perde a clareza quando a pressão aumenta", power: "mantém a cabeça fria nos momentos críticos" },
-    4: { chaos: "trabalha até a exaustão mas sente que corre na esteira sem sair do lugar", inert: "oscila entre esforço pesado e estagnação", power: "transforma esforço diário em avanço concreto" },
-    5: { chaos: "abre várias frentes e projetos mas não consegue dar acabativa", inert: "deixa entregas arrastarem na reta final", power: "começa e finaliza o que propõe" },
-    6: { chaos: "o dinheiro até entra na sua mão, mas escorre por ralos sem você perceber", inert: "perde o controle do caixa por desatenção", power: "protege e retém os recursos que produz" },
-    7: { chaos: "vive em modo de guerra, armado e esperando um golpe a qualquer instante", inert: "fica em alerta defensivo quando o ambiente muda", power: "lê o ambiente com serenidade" },
+    4: { chaos: "trabalha e se esforça até a exaustão, mas sente que corre na esteira sem sair do lugar", inert: "oscila entre esforço pesado e sensação de estagnação", power: "transforma esforço diário em avanço concreto" },
+    5: { chaos: "abre várias frentes e planos, mas não consegue dar acabativa", inert: "deixa entregas importantes arrastarem na reta final", power: "começa e finaliza o que propõe" },
+    6: { chaos: "o dinheiro até entra na sua mão, mas escorre por ralos sem você perceber", inert: "perde o controle dos recursos por desatenção", power: "protege e retém os recursos que produz" },
+    7: { chaos: "vive em modo de guerra, armado e esperando um golpe ou traição a qualquer instante", inert: "fica em alerta defensivo quando o ambiente muda", power: "lê o ambiente com serenidade" },
     8: { chaos: "não consegue confiar nas intenções de ninguém ao seu redor", inert: "filtra tudo com desconfiança seletiva", power: "discerne em quem confiar sem paranoia" },
-    9: { chaos: "carrega ansiedade e aperto físico no peito mesmo sem motivo aparente", inert: "sente tensão no peito diante de cobranças", power: "mantém o corpo e a respiração em equilíbrio" },
+    9: { chaos: "carrega ansiedade e aperto físico no peito mesmo sem motivo aparente", inert: "sente tensão no peito diante de pressões", power: "mantém o corpo e a respiração em equilíbrio" },
     10: { chaos: "entra em atritos, discussões e guerras verbais com facilidade", inert: "perde a paciência em conversas tensas", power: "não compra brigas inúteis" },
     11: { chaos: "sente que fala, explica e se desgasta, mas ninguém te ouve ou respeita", inert: "sente que sua palavra perde peso em certos ambientes", power: "tem voz de comando ouvida e respeitada" },
     12: { chaos: "fala no calor do impulso e se arrepende logo depois de abrir a boca", inert: "deixa escapar palavras antes de ponderar", power: "usa o silêncio estratégico antes de responder" },
@@ -805,181 +825,125 @@
     14: { chaos: "sofre intensamente e não consegue soltar quem ou o que já foi", inert: "demora para digerir frustrações emocionais", power: "processa perdas e desapega com maturidade" },
     15: { chaos: "suas emoções vão do extremo da euforia ao fundo do poço do nada", inert: "tem oscilações bruscas de humor conforme o dia", power: "sustenta estabilidade emocional constante" },
     16: { chaos: "age no impulso cego, decidindo no calor da emoção sem medir o estrago", inert: "cede a decisões precipitadas sob pressão", power: "domina seus impulsos e age com cálculo consciente" },
-    17: { chaos: "usa compras e gastos para anestesiar vazios emocionais", inert: "gasta por compensação quando está frustrado", power: "não usa dinheiro para tapar buracos emocionais" },
+    17: { chaos: "usa compras e consumo para anestesiar vazios emocionais", inert: "gasta por compensação quando está frustrado", power: "não usa dinheiro para tapar buracos emocionais" },
     18: { chaos: "busca o prazer e o alívio imediato mesmo sabendo que vai se prejudicar", inert: "troca metas de longo prazo por recompensas rápidas", power: "tem disciplina para dizer não ao prazer que sabota" },
-    19: { chaos: "arrasta situações, parcerias ou vínculos que já morreram há muito tempo", inert: "adia cortes necessários por receio de encerrar ciclos", power: "encerra ciclos mortos com corte limpo" },
+    19: { chaos: "arrasta relações, parcerias ou situações que já morreram há muito tempo", inert: "adia cortes necessários por receio de encerrar ciclos", power: "encerra ciclos mortos com corte limpo" },
     20: { chaos: "guarda mágoas e ressentimentos antigos que endurecem sua postura", inert: "carrega incômodos mal resolvidos do passado", power: "não acumula veneno nem ressentimento" },
     21: { chaos: "aceita migalhas afetivas ou comerciais apenas pelo medo de ficar só", inert: "baixa seus critérios quando sente medo de ficar só", power: "sustenta limites inegociáveis e não aceita migalhas" }
   };
 
-  // Base dos 7 Domínios com Comando Imediato e Sequência de 7 Dias
+  // Base dos 7 Domínios com leitura universal e explicação em todas as 21 perguntas
   const domainsData = [
     {
       id: 1,
       shortName: "CABEÇA",
       name: "1. Cabeça",
-      subtitle: "Decisão e Direção",
+      subtitle: "Clareza, Filtro e Governo Mental",
       crystal: "Quartzo Transparente",
-      immediateAction: "Escolha hoje UMA decisão que você está adiando, risque as desculpas em um papel e execute o primeiro passo antes das 18h. Não calcule mais.",
-      leverageTip: "Use sua clareza mental para comandar os setores que estão oscilando.",
+      immediateAction: "Escolha hoje UMA decisão pendente na sua vida pessoal ou profissional, risque as desculpas em um papel e execute o primeiro passo antes de dormir. Pare de calcular.",
+      leverageTip: "Use sua clareza mental para organizar os setores que estão oscilando.",
       inertTip: "Estabeleça prazos curtos para decidir sem ficar recalculando.",
       confrontation: "Qual é a decisão que você já sabe que precisa tomar há semanas, mas continua fingindo que precisa 'pensar mais um pouco'?",
-      notifications7Days: `SEQUÊNCIA ATIVA DE 7 DIAS — DOMÍNIO DA CABEÇA:
-• Dia 1 (Manhã): Bom dia. Hoje o seu único trabalho mental é escolher uma pendência que você está adiando, riscar as desculpas e executar o primeiro passo antes do meio-dia. Não calcule mais — aja.
-• Dia 2 (Tarde): O que já foi decidido ontem está encerrado. Se a sua mente tentar voltar para duvidar da escolha, segure o seu Objeto-Âncora por 5 segundos e volte para a tarefa da frente.
-• Dia 3 (Manhã): Névoa na cabeça é dreno na carteira. Qual é a única decisão que, se tomada hoje, destrava o resto da sua semana? Execute agora.
-• Dia 4 (Tarde): Você escreveu o seu Contrato de Soberania hoje pela manhã? Se não escreveu, pare 3 minutos agora e grave no papel quem está no comando.
-• Dia 5 (Manhã): Diante de qualquer problema hoje, não reaja no automático. Respire, ouça o Áudio de Recalibração e decida com frieza.
-• Dia 6 (Tarde): Pare de abrir novas ideias ou cenários na cabeça. Conclua o que está na sua mesa hoje.
-• Dia 7 (Noite): 7 dias concluídos. O que você decidiu e sustentou esta semana que antes você teria adiado? Anote no seu caderno.`,
       questions: [
-        { id: 1, text: "1. Você trava e pensa demais antes de agir?", hint: "" },
-        { id: 2, text: "2. Você se arrepende das escolhas que faz?", hint: "" },
-        { id: 3, text: "3. Sua mente fica confusa em momentos importantes?", hint: "" }
+        { id: 1, text: "1. Você trava e pensa demais antes de agir?", hint: "Ficar analisando todos os cenários possíveis e acabar adiando o que precisa ser feito." },
+        { id: 2, text: "2. Você se arrepende das escolhas que faz?", hint: "Tomar uma decisão e logo depois ficar duvidando ou se culpando pelo caminho escolhido." },
+        { id: 3, text: "3. Sua mente fica confusa em momentos importantes?", hint: "Sentir um 'branco' ou embaralhamento mental justamente na hora de resolver algo decisivo." }
       ]
     },
     {
       id: 2,
       shortName: "PÉS",
       name: "2. Pés",
-      subtitle: "Movimento Material e Avanço",
+      subtitle: "Tração, Acabativa e Sustentação na Matéria",
       crystal: "Citrino",
-      immediateAction: "Congele qualquer projeto novo por 7 dias. Escolha a entrega mais próxima de gerar dinheiro ou fechamento e finalize hoje. Rastreie 100% do dinheiro que sair do seu bolso.",
-      leverageTip: "Sua capacidade de execução é a força principal para tracionar resultados agora.",
-      inertTip: "Feche uma entrega antes de abrir outra e vigie o caixa diariamente.",
-      confrontation: "Quantos projetos ou ideias você abriu nos últimos meses que hoje são apenas peso morto porque você não teve firmeza para finalizar?",
-      notifications7Days: `SEQUÊNCIA ATIVA DE 7 DIAS — DOMÍNIO DOS PÉS:
-• Dia 1 (Manhã): Bom dia. Escolha o projeto ou entrega que está parado no meio e dê um passo concreto de finalização hoje. Começar sem terminar é vazamento de energia.
-• Dia 2 (Tarde): Olhe para o seu extrato hoje. O dinheiro que entrou está sendo protegido para construir patrimônio ou está escorrendo em coisas pequenas?
-• Dia 3 (Manhã): Não confunda estar ocupado com avançar na matéria. Qual ação de hoje vai colocar dinheiro real ou fechamento no seu caixa?
-• Dia 4 (Tarde): Metade da semana. Seu Contrato de Soberania foi reescrito à mão hoje? Honre a sua palavra com você mesmo.
-• Dia 5 (Manhã): Existe alguma tarefa ou cliente sugando suas horas sem dar retorno? Hoje é dia de cortar ou renegociar.
-• Dia 6 (Tarde): Segure o Objeto-Âncora antes de aceitar qualquer demanda nova. Só aceite o que constrói.
-• Dia 7 (Noite): 7 dias concluídos. Olhe para trás: o que saiu do papel e virou resultado concreto esta semana?`,
+      immediateAction: "Congele qualquer frente nova por 7 dias. Escolha uma pendência real (em casa, na saúde ou no trabalho) e leve até o fim hoje. Vigie cada saída de recurso.",
+      leverageTip: "Sua capacidade de execução e constância é a base para sustentar sua evolução.",
+      inertTip: "Conclua uma etapa antes de abrir outra e mantenha o ritmo diário.",
+      confrontation: "Quantas coisas você abriu nos últimos meses que hoje são apenas peso morto porque você não teve firmeza para finalizar?",
       questions: [
-        { id: 4, text: "4. Você trabalha muito e sente que não avança?", hint: "" },
-        { id: 5, text: "5. Você começa projetos e não consegue finalizar?", hint: "" },
-        { id: 6, text: "6. Seu dinheiro entra, mas some sem você ver?", hint: "" }
+        { id: 4, text: "4. Você trabalha muito e sente que não avança?", hint: "Terminar o dia exausto de tanto fazer esforço, mas sentir que a vida não sai do lugar." },
+        { id: 5, text: "5. Você começa projetos e não consegue finalizar?", hint: "Iniciar planos, hábitos ou tarefas com empolgação, mas abandonar no meio do caminho." },
+        { id: 6, text: "6. Seu dinheiro entra, mas some sem você ver?", hint: "Perceber que os recursos chegam até você, mas escorrem rápido sem construir reserva." }
       ]
     },
     {
       id: 3,
       shortName: "PULMÕES",
       name: "3. Pulmões",
-      subtitle: "Instinto e Proteção",
+      subtitle: "Ritmo, Fronteira e Preservação Vital",
       crystal: "Jaspe Vermelho",
-      immediateAction: "Desarme o modo de guerra hoje. Quando sentir aperto no peito ou desconfiança, pare por 3 minutos, apoie os pés no chão e execute o Áudio de Recalibração antes de tomar qualquer atitude.",
-      leverageTip: "Seu vigor físico e leitura de ambiente blindam você contra crises externas.",
-      inertTip: "Pare de absorver crises de terceiros e recalibre a respiração.",
-      confrontation: "De quem ou do que você está tentando se defender o tempo inteiro a ponto de não conseguir respirar em paz nem dentro da própria casa?",
-      notifications7Days: `SEQUÊNCIA ATIVA DE 7 DIAS — DOMÍNIO DOS PULMÕES:
-• Dia 1 (Tarde): Pare por 2 minutos agora. Solte os ombros, apoie os pés no chão e ouça o Áudio de Recalibração. O caos lá fora não tem permissão para morar no seu peito.
-• Dia 2 (Manhã): Hoje, observe o ambiente sem antecipar tragédias. Nem todo mundo está tentando te dar um golpe — economize seu fôlego.
-• Dia 3 (Tarde): Sentiu aperto no peito? Não tome nenhuma decisão agora. Puxe o ar em 4s, segure 4s, solte em 6s e toque no seu Objeto-Âncora.
-• Dia 4 (Manhã): Você reescreveu seu juramento hoje ao acordar? Lembre-se: o seu território interno é governado por você.
-• Dia 5 (Tarde): Você está carregando um problema que não é seu hoje? Devolva a responsabilidade para quem pertence.
-• Dia 6 (Manhã): Mantenha a postura ereta e a respiração profunda. Você tem estrutura para atravessar qualquer pressão sem perder o centro.
-• Dia 7 (Noite): 7 dias concluídos. Perceba como o seu corpo reage hoje quando você escolhe não entrar no modo de guerra.`,
+      immediateAction: "Desarme o modo de guerra hoje. Quando sentir aperto no peito ou desconfiança, pare por 3 minutos, apoie os pés no chão e respire fundo antes de reagir a qualquer pessoa.",
+      leverageTip: "Sua serenidade e leitura fria do ambiente blindam você contra crises externas.",
+      inertTip: "Pare de absorver problemas de terceiros e preserve seu fôlego.",
+      confrontation: "De quem ou do que você está tentando se defender o tempo inteiro a ponto de não conseguir respirar em paz?",
       questions: [
-        { id: 7, text: "7. Você vive em estado de alerta e desconfiança?", hint: "" },
-        { id: 8, text: "8. Você acha difícil confiar nas intenções das pessoas?", hint: "" },
-        { id: 9, text: "9. Você sente ansiedade ou aperto no peito sem motivo?", hint: "" }
+        { id: 7, text: "7. Você vive em estado de alerta e desconfiança?", hint: "Estar sempre armado, esperando que alguém vá te prejudicar, trair ou tirar vantagem." },
+        { id: 8, text: "8. Você acha difícil confiar nas intenções das pessoas?", hint: "Duvidar até de gestos simples na família, nas relações ou no trabalho, sempre buscando segunda intenção." },
+        { id: 9, text: "9. Você sente ansiedade ou aperto no peito sem motivo?", hint: "Sentir uma angústia física ou peso na respiração mesmo quando não há nenhum problema acontecendo." }
       ]
     },
     {
       id: 4,
       shortName: "GARGANTA",
       name: "4. Garganta",
-      subtitle: "Palavra e Influência",
+      subtitle: "Expressão, Limite Verbal e Posicionamento",
       crystal: "Quartzo Azul",
-      immediateAction: "Ative a regra dos 5 segundos: antes de responder qualquer provocação, justificar um erro ou falar preço, segure seu Objeto-Âncora em silêncio absoluto. Corte discussões estéreis pela raiz.",
-      leverageTip: "Sua autoridade verbal e firmeza para negociar são armas para fechar acordos limpos.",
-      inertTip: "Pratique a pausa de 5 segundos antes de reagir verbalmente.",
-      confrontation: "Quantas vezes você já perdeu dinheiro, autoridade ou paz porque não conseguiu segurar a língua por cinco segundos?",
-      notifications7Days: `SEQUÊNCIA ATIVA DE 7 DIAS — DOMÍNIO DA GARGANTA:
-• Dia 1 (Manhã): Bom dia. Hoje a sua regra de ouro é: antes de responder qualquer provocação ou falar preço, segure o Objeto-Âncora por 5 segundos em silêncio absoluto.
-• Dia 2 (Tarde): Pare de explicar demais o que você faz. Quem tem autoridade comunica com poucas palavras e sustenta a posição.
-• Dia 3 (Manhã): Não feche nenhum acordo ou compromisso hoje por pressa ou ansiedade. Se precisar, diga: 'Vou avaliar e te retorno'.
-• Dia 4 (Tarde): Contrato reescrito à mão hoje? Lembre-se: a palavra que você sustenta consigo mesmo é a que dá peso à sua voz diante dos outros.
-• Dia 5 (Manhã): Estão tentando te puxar para uma discussão inútil hoje? O seu silêncio vale mais que mil palavras na hora da raiva.
-• Dia 6 (Tarde): Diga um 'não' limpo e sem desculpas hoje para algo que desrespeita o seu tempo ou o seu valor.
-• Dia 7 (Noite): 7 dias concluídos. Quantos conflitos e prejuízos você evitou esta semana apenas dominando a própria língua?`,
+      immediateAction: "Ative a pausa de 5 segundos: antes de responder provocações, se justificar ou fechar qualquer compromisso, fique em silêncio absoluto. Corte discussões inúteis.",
+      leverageTip: "Sua comunicação firme e clara é sua ferramenta principal para estabelecer respeito.",
+      inertTip: "Pratique o silêncio de 5 segundos antes de reagir verbalmente.",
+      confrontation: "Quantas vezes você já perdeu paz, respeito ou oportunidades porque não conseguiu segurar a língua por cinco segundos?",
       questions: [
-        { id: 10, text: "10. Você entra em conflitos e discussões facilmente?", hint: "" },
-        { id: 11, text: "11. Você sente que fala, mas ninguém te ouve?", hint: "" },
-        { id: 12, text: "12. Você fala as coisas por impulso e se arrepende?", hint: "" }
+        { id: 10, text: "10. Você entra em conflitos e discussões facilmente?", hint: "Comprar brigas por detalhes, perder a paciência rápido ou cair em provocações verbais." },
+        { id: 11, text: "11. Você sente que fala, mas ninguém te ouve?", hint: "Sentir que precisa repetir as coisas várias vezes dentro de casa ou no trabalho para ser levado a sério." },
+        { id: 12, text: "12. Você fala as coisas por impulso e se arrepende?", hint: "Soltar palavras duras ou promessas no calor do momento e sentir peso na consciência logo depois." }
       ]
     },
     {
       id: 5,
       shortName: "CORAÇÃO",
       name: "5. Coração",
-      subtitle: "Magnetismo Emocional",
+      subtitle: "Coerência Interna, Autonomia e Vínculo",
       crystal: "Quartzo Verde",
-      immediateAction: "Recolha a sua energia de volta para o seu centro. Pare de buscar aprovação ou validar seu valor pela reação dos outros. Ouça a Trilha Subliminar diariamente para estabilizar sua frequência.",
-      leverageTip: "Sua estabilidade emocional e autossuficiência atraem pessoas e negócios alinhados.",
-      inertTip: "Não terceirize seu humor para a reação dos outros.",
-      confrontation: "Por que você continua entregando o controle do seu estado emocional para pessoas que não sustentam nem a própria palavra?",
-      notifications7Days: `SEQUÊNCIA ATIVA DE 7 DIAS — DOMÍNIO DO CORAÇÃO:
-• Dia 1 (Manhã): Bom dia. Coloque a Trilha Subliminar para tocar agora enquanto se arruma. Você não mendiga atenção; você sustenta a sua própria frequência.
-• Dia 2 (Noite): Antes de dormir, observe: você buscou aprovação de alguém hoje que não constrói nada com você? Recolha a sua energia de volta para o seu centro.
-• Dia 3 (Tarde): O humor dos outros não é termômetro para o seu dia. Se alguém ao redor fechou a cara, mantenha a sua postura intacta.
-• Dia 4 (Manhã): Contrato reescrito à mão hoje? Honre o compromisso de não entregar o governo das suas emoções na mão de terceiros.
-• Dia 5 (Tarde): Quando você para de correr atrás de validação, as pessoas certas passam a respeitar a sua presença. Mantenha-se firme.
-• Dia 6 (Noite): Solte o que não quer ficar. Quem precisa ser convencido a estar ao seu lado já está ocupando o lugar errado.
-• Dia 7 (Noite): 7 dias concluídos. Registre no seu caderno como você se sente quando assume o próprio governo emocional.`,
+      immediateAction: "Recolha sua energia de volta para o seu centro hoje. Pare de medir o seu valor pela atenção ou humor de quem está ao seu lado.",
+      leverageTip: "Sua autonomia emocional sustenta vínculos saudáveis sem dependência.",
+      inertTip: "Não entregue o controle do seu humor para a reação dos outros.",
+      confrontation: "Por que você continua entregando o governo do seu estado emocional para pessoas que não sustentam nem a própria palavra?",
       questions: [
-        { id: 13, text: "13. Você se apega e se dependura nas pessoas rápido demais?", hint: "" },
-        { id: 14, text: "14. Você sofre intensamente e não consegue desapegar?", hint: "" },
-        { id: 15, text: "15. Suas emoções mudam de extremo do nada?", hint: "" }
+        { id: 13, text: "13. Você se apega e se dependura nas pessoas rápido demais?", hint: "Criar expectativas altas logo no início ou colocar sua felicidade nas mãos de outra pessoa." },
+        { id: 14, text: "14. Você sofre intensamente e não consegue desapegar?", hint: "Ficar preso a términos, rejeições ou frustrações afetivas por muito tempo sem conseguir virar a página." },
+        { id: 15, text: "15. Suas emoções mudam de extremo do nada?", hint: "Ir da alegria total para a irritação ou tristeza profunda em questão de minutos por pequenos gatilhos." }
       ]
     },
     {
       id: 6,
       shortName: "VENTRE",
       name: "6. Ventre",
-      subtitle: "Desejo e Criação",
+      subtitle: "Impulso Vital, Desejo e Autodomínio",
       crystal: "Cornalina",
-      immediateAction: "Instale uma trava física imediata: antes de passar o cartão, comprar algo ou ceder a um impulso, segure seu Objeto-Âncora e espere 10 minutos. Não troque seu império futuro por alívios de 5 minutos.",
-      leverageTip: "Seu autodomínio sobre impulsos permite direcionar energia para construir patrimônio.",
-      inertTip: "Crie uma pausa de 10 minutos antes de qualquer compra ou decisão rápida.",
-      confrontation: "O que você está tentando anestesiar toda vez que gasta dinheiro ou cede a um impulso sabendo que vai se arrepender amanhã?",
-      notifications7Days: `SEQUÊNCIA ATIVA DE 7 DIAS — DOMÍNIO DO VENTRE:
-• Dia 1 (Tarde): Alerta de meio de tarde: antes de passar o cartão ou comprar qualquer coisa hoje, toque no Objeto-Âncora e pergunte: 'Eu preciso disso ou estou tentando anestesiar uma frustração?'
-• Dia 2 (Noite): À noite o cansaço pede recompensa rápida. Não troque o seu projeto de vida por um alívio de cinco minutos.
-• Dia 3 (Tarde): Pegue a energia da sua vontade hoje e coloque em algo que gera valor real em vez de gastar no automático.
-• Dia 4 (Manhã): Contrato de Soberania escrito à mão hoje? Você governa seus desejos — não é escravo deles.
-• Dia 5 (Tarde): Deu vontade impulsiva de agir ou gastar? Espere 10 minutos respirando fundo antes de executar. O impulso morre quando você observa.
-• Dia 6 (Noite): Fim de semana chegando. Mantenha a regra de ouro: cada real que você não queima por ansiedade é tijolo na sua soberania.
-• Dia 7 (Noite): 7 dias concluídos. Anote quanto dinheiro e energia você salvou esta semana ao travar o impulso cego.`,
+      immediateAction: "Instale uma trava física imediata: antes de gastar dinheiro, comer por ansiedade ou ceder a um impulso, espere 10 minutos respirando fundo. Não troque seu futuro por alívios rápidos.",
+      leverageTip: "Seu autodomínio sobre impulsos canaliza sua energia para construir algo sólido.",
+      inertTip: "Crie uma pausa de 10 minutos antes de qualquer compra ou reação impulsiva.",
+      confrontation: "O que você está tentando anestesiar toda vez que cede a um impulso sabendo que vai se prejudicar amanhã?",
       questions: [
-        { id: 16, text: "16. Você age puramente por impulso cego?", hint: "Guia do Operador: Fazer coisas no calor da emoção sem medir consequências (decidir na pressa, explodir ou agir no automático)." },
-        { id: 17, text: "17. Você gasta e consome para tapar um vazio emocional?", hint: "" },
-        { id: 18, text: "18. Você busca o prazer imediato mesmo sabendo que vai se prejudicar?", hint: "" }
+        { id: 16, text: "16. Você age puramente por impulso cego?", hint: "Fazer coisas no calor da emoção sem medir consequências (decidir na pressa, explodir ou agir no automático)." },
+        { id: 17, text: "17. Você gasta e consome para tapar um vazio emocional?", hint: "Comprar coisas sem precisar, comer demais ou buscar distrações para aliviar tédio, carência ou estresse." },
+        { id: 18, text: "18. Você busca o prazer imediato mesmo sabendo que vai se prejudicar?", hint: "Escolher o alívio ou a recompensa de agora mesmo sabendo que isso vai sabotar sua saúde, caixa ou relação depois." }
       ]
     },
     {
       id: 7,
       shortName: "ESQUELETO",
       name: "7. Esqueleto",
-      subtitle: "Encerramento e Raiz",
+      subtitle: "Estrutura, Raiz e Corte Definitivo",
       crystal: "Turmalina Negra",
-      immediateAction: "Dê um corte limpo hoje. Escreva no seu Contrato de Soberania qual situação, vínculo ou parceria morta você encerra agora — e execute o Rito de Fixação à mão por 7 dias sem aceitar migalhas.",
+      immediateAction: "Dê um corte limpo hoje. Escreva no papel qual situação, hábito ou vínculo desgastado você encerra agora — e pare de aceitar migalhas por medo do vazio.",
       leverageTip: "Sua firmeza de limites e coragem para encerrar ciclos sustentam toda a sua estrutura.",
       inertTip: "Revise o que você tolera por medo de desagradar e firme limites claros.",
       confrontation: "O que já morreu na sua vida há meses ou anos que você ainda se recusa a enterrar por medo de enfrentar o vazio?",
-      notifications7Days: `SEQUÊNCIA ATIVA DE 7 DIAS — DOMÍNIO DO ESQUELETO:
-• Dia 1 (Manhã): Bom dia. Olhe para o item 1 do seu Contrato de Soberania. Qual é a primeira ação prática hoje para enterrar definitivamente o que já morreu na sua vida?
-• Dia 2 (Noite): Guardar mágoa é tomar veneno esperando que o outro passe mal. Encerre essa conta mentalmente hoje e siga leve.
-• Dia 3 (Tarde): Quem aceita migalhas afetivas ou comerciais por medo de ficar só nunca terá estrutura para construir um império. Eleve o seu padrão hoje.
-• Dia 4 (Manhã): Contrato reescrito de próprio punho hoje? A sua coluna fica ereta quando você sustenta os seus limites.
-• Dia 5 (Tarde): Hoje, se algo cruzar a linha do que você decidiu não aceitar mais, corte na hora sem culpa.
-• Dia 6 (Noite): O novo só entra quando você esvazia o que já apodreceu. Sustente o silêncio e o espaço limpo.
-• Dia 7 (Noite): 7 dias concluídos. Você sobreviveu ao corte e está mais forte. Prepare-se para a nossa revisão.`,
       questions: [
-        { id: 19, text: "19. Você arrasta e mantém situações que já morreram?", hint: "" },
-        { id: 20, text: "20. Você guarda mágoas e ressentimentos do passado?", hint: "" },
-        { id: 21, text: "21. Você aceita migalhas afetivas apenas para não ficar só?", hint: "" }
+        { id: 19, text: "19. Você arrasta e mantém situações que já morreram?", hint: "Continuar em relacionamentos, amizades, hábitos ou compromissos que já acabaram por dentro há muito tempo." },
+        { id: 20, text: "20. Você guarda mágoas e ressentimentos do passado?", hint: "Carregar rancor ou lembranças de ofensas antigas que pesam nas suas costas e travam o seu presente." },
+        { id: 21, text: "21. Você aceita migalhas afetivas apenas para não ficar só?", hint: "Se contentar com o mínimo de atenção, respeito ou retorno apenas pelo medo da solidão ou da mudança." }
       ]
     }
   ];
@@ -1039,8 +1003,8 @@
         noise.start(t);
 
         const partials = intensity === 0
-          ? [3850, 6120]
-          : (intensity === 1 ? [2420, 4180] : [1890, 3290]);
+          ? [1480, 3190]
+          : (intensity === 1 ? [980, 2110] : [720, 1590]);
 
         partials.forEach((freq, idx) => {
           const osc = audioCtx.createOscillator();
@@ -1281,17 +1245,17 @@
     }
   }
 
-  // Simula um cenário realista baseado em arquétipos
+  // Simula um cenário realista baseado em arquétipos universais
   function runSimulation() {
     playMetallicClack(2);
     const archetypes = [
-      "Empresário em Travamento de Caixa",
-      "Líder em Sobrecarga e Hipervigilância",
-      "Perfil Impulsivo / Consumo Compensatório",
-      "Apego e Estagnação de Ciclos",
-      "Oscilação Geral / Inércia Produtiva",
-      "Alta Soberania com Trava Oculta",
-      "Colapso de Direção e Raiz"
+      "Crise Afetiva e Apego",
+      "Esgotamento Físico e Ansiedade",
+      "Travamento de Caixa e Projetos",
+      "Conflito Familiar e Limites",
+      "Oscilação Geral / Inércia",
+      "Soberania com Ponto de Tensão",
+      "Falta de Direção e Propósito"
     ];
     const arch = archetypes[Math.floor(Math.random() * archetypes.length)];
     document.getElementById('consulenteName').value = `${arch} (#${Math.floor(1000 + Math.random() * 8999)})`;
@@ -1337,7 +1301,41 @@
     return `${arr.slice(0, -1).join(", ")} e ${arr[arr.length - 1]}`;
   }
 
-  // Processa as 5 Leis da Telemetria e gera o Laudo de Prioridade + Verso do Exame
+  // Analisa a microdinâmica interna das 3 cavidades de cada domínio
+  function analyzeDomainMicroDynamics(domain) {
+    const vals = domain.questions.map(q => answers['q' + q.id]);
+    const sum = vals[0] + vals[1] + vals[2];
+    const zeros = vals.filter(v => v === 0).length;
+    const ones = vals.filter(v => v === 1).length;
+    const twos = vals.filter(v => v === 2).length;
+
+    let sovQ = "";
+    domain.questions.forEach(q => {
+      if (answers['q' + q.id] === 0) sovQ = questionMicroData[q.id].power;
+    });
+
+    if (sum === 6) {
+      return "Cristalização Total (2-2-2): Todas as 3 cavidades estão no Sal. Exige corte externo imediato antes de qualquer expansão.";
+    }
+    if (sum >= 4 && zeros === 1) {
+      return `Caos com Ilha de Soberania (2-2-0): Apesar do bloqueio, você mantém uma força intacta aqui (${sovQ}). Use essa lucidez interna como alavanca para destravar o restante.`;
+    }
+    if (sum >= 4 && ones === 2) {
+      return "Caos por Contaminação de Inertes (2-1-1): Apenas 1 ponto crítico está arrastando 2 cavidades inertes para baixo. Cortando esse único ponto, os outros dois se estabilizam rápido.";
+    }
+    if (sum >= 2 && sum <= 3 && zeros >= 1 && twos === 0) {
+      return `Inércia Ascendente (1-1-0): Energia represada apoiada na Soberania (${sovQ}). Tendência natural de subir para o equilíbrio com um ajuste simples.`;
+    }
+    if (sum >= 2 && sum <= 3 && twos === 1) {
+      return "Tensão Polarizada Interna (2-1-0 / 2-0-0): Há um ponto agudo de Caos disputando espaço com sua Soberania interna. Use sua força para neutralizar esse único foco.";
+    }
+    if (sum === 3 && ones === 3) {
+      return "Barragem Cheia (1-1-1): As 3 cavidades estão em oscilação morna. Precisa de movimento prático imediato para não escorregar para o Caos.";
+    }
+    return "Soberania Consolidada: Estrutura interna firme e alinhada.";
+  }
+
+  // Processa a telemetria sistêmica e gera o Laudo + Exame Completo
   function generateReport() {
     if (Object.keys(answers).length < 21) {
       showToast("Atenção Operador: Preencha todas as 21 cavidades da Prancha antes de gerar o laudo.", true);
@@ -1371,6 +1369,7 @@
     const sortedDomains = [...domainsData].sort((a, b) => domainScores['d' + b.id] - domainScores['d' + a.id]);
     const topDomain = sortedDomains[0];
     const topScore = domainScores['d' + topDomain.id];
+    const microNote = analyzeDomainMicroDynamics(topDomain);
 
     // 1. Cartão Principal de Impacto (Frente do Exame)
     const heroCard = document.getElementById('heroCard');
@@ -1378,6 +1377,7 @@
     const heroTitle = document.getElementById('heroTitle');
     const heroSubtitle = document.getElementById('heroSubtitle');
     const heroWhy = document.getElementById('heroWhy');
+    const heroLever = document.getElementById('heroLever');
     const heroAction = document.getElementById('heroAction');
     const heroQuestion = document.getElementById('heroQuestion');
 
@@ -1393,8 +1393,9 @@
       urgencyBadge.innerText = "🚨 URGÊNCIA • ESTADO DE CAOS PRIORITÁRIO";
       heroTitle.innerText = `${topDomain.name.toUpperCase()} (${topScore}/6 PTS)`;
       heroSubtitle.style.color = "#ff9c94";
-      heroSubtitle.innerText = `${topDomain.subtitle} • Bloqueio Cristalizado (Foco Único de Corte)`;
-      heroWhy.innerText = `Hoje ${formatListNatural(symptoms)}. Esse é o ralo principal que está drenando o restante do seu corpo e dos seus resultados.`;
+      heroSubtitle.innerText = `${topDomain.subtitle} • Foco Único de Intervenção`;
+      heroWhy.innerText = `Hoje ${formatListNatural(symptoms)}. Esse é o ponto central que está drenando sua vitalidade, suas relações ou seus resultados.`;
+      heroLever.innerText = microNote;
       heroAction.innerText = topDomain.immediateAction;
     } else if (topScore >= 2) {
       heroCard.className = "exam-hero-card sovereign-mode";
@@ -1403,7 +1404,8 @@
       heroTitle.innerText = `${topDomain.name.toUpperCase()} (${topScore}/6 PTS)`;
       heroSubtitle.style.color = "#e2e8f0";
       heroSubtitle.innerText = `${topDomain.subtitle} • Zona Inerte (Ajuste Preventivo)`;
-      heroWhy.innerText = `Você não está em colapso, mas ${formatListNatural(symptoms)}. Se não ajustar agora, essa oscilação vai virar bloqueio.`;
+      heroWhy.innerText = `Você não está em colapso, mas ${formatListNatural(symptoms)}. Se não ajustar agora, essa oscilação vira bloqueio.`;
+      heroLever.innerText = microNote;
       heroAction.innerText = topDomain.immediateAction;
     } else {
       heroCard.className = "exam-hero-card sovereign-mode";
@@ -1412,31 +1414,50 @@
       heroTitle.innerText = `CORPO SOBERANO ALINHADO (${totalIGF}/42 PTS)`;
       heroSubtitle.style.color = "#f3d576";
       heroSubtitle.innerText = "Todos os 7 Domínios sob governo consciente";
-      heroWhy.innerText = "Suas 7 estações estão operando com clareza, firmeza de execução e limites definidos.";
-      heroAction.innerText = `Mantenha o Rito diário e use ${topDomain.name} como base para expandir seus negócios e projetos.`;
+      heroWhy.innerText = "Suas 7 estações estão operando com clareza, autonomia emocional e limites definidos.";
+      heroLever.innerText = "Estrutura interna íntegra em todas as cavidades.";
+      heroAction.innerText = `Mantenha o Rito diário e use ${topDomain.name} como base para expandir seus projetos e vínculos.`;
     }
     heroQuestion.innerText = `"${name}, ${topDomain.confrontation}"`;
 
-    // 2. Gaveta do Exame Técnico Completo (Verso do Exame)
+    // 2. Tríades Sistêmicas do Organismo (Cruzamento Holístico)
+    const triads = [];
+    const triadIdentity = domainScores['d5'] + domainScores['d7'] + domainScores['d3'];
+    const triadMaterial = domainScores['d1'] + domainScores['d2'] + domainScores['d6'];
+    const triadRelational = domainScores['d4'] + domainScores['d1'] + domainScores['d5'];
+
+    if (triadIdentity >= 11) {
+      triads.push(`Tríade Estrutura e Sustento Emocional (Coração + Esqueleto + Pulmões — ${triadIdentity}/18 pts): Crise de sustentação pessoal. O medo de ficar só ou ser rejeitado faz você aceitar migalhas e viver em estado de alerta constante.`);
+    }
+    if (triadMaterial >= 11) {
+      triads.push(`Tríade Execução e Materialização (Cabeça + Pés + Ventre — ${triadMaterial}/18 pts): Ciclo de dispersão e sabotagem. Você pensa demais, age por impulso para aliviar a ansiedade e não conclui nem retém o que produz.`);
+    }
+    if (triadRelational >= 11) {
+      triads.push(`Tríade Comando e Posicionamento (Garganta + Cabeça + Coração — ${triadRelational}/18 pts): Perda de posicionamento. A necessidade de aprovação nubla sua clareza e faz você engolir sapos até explodir.`);
+    }
+
+    // 3. Checagem Cruzada (Incoerências)
     const contradictions = [];
-    if (answers['q2'] === 0 && answers['q16'] === 2) contradictions.push("Máscara de Controle (P2 vs. P16): Diz que raramente se arrepende das escolhas, mas age por impulso cego. Evita olhar para o estrago que deixa para trás.");
-    if (answers['q15'] === 0 && (answers['q13'] === 2 || answers['q14'] === 2)) contradictions.push("Falsa Frieza Emocional (P15 vs. P13/P14): Diz que o humor não oscila, mas se apega rápido e sofre sem soltar. Tenta parecer frio por fora, mas é refém por dentro.");
-    if (answers['q6'] === 0 && answers['q17'] === 2) contradictions.push("Negação Financeira (P6 vs. P17): Diz que o dinheiro não some sem ver, mas gasta para tapar vazios emocionais.");
+    if (answers['q2'] === 0 && answers['q16'] === 2) contradictions.push("Máscara de Controle (P2 vs. P16): Diz que raramente se arrepende das escolhas, mas age por impulso cego. Evita encarar o estrago que deixa para trás.");
+    if (answers['q15'] === 0 && (answers['q13'] === 2 || answers['q14'] === 2)) contradictions.push("Falsa Frieza Emocional (P15 vs. P13/P14): Diz que o humor não oscila, mas se apega rápido e sofre sem soltar. Por fora tenta parecer frio, por dentro é refém.");
+    if (answers['q6'] === 0 && answers['q17'] === 2) contradictions.push("Negação de Vazamento (P6 vs. P17): Diz que os recursos não somem sem ver, mas gasta para tapar vazios emocionais.");
     if (answers['q1'] === 0 && answers['q5'] === 2) contradictions.push("Ilusão de Movimento (P1 vs. P5): Diz que não trava antes de agir, mas nunca finaliza o que começa.");
 
-    const bridges = [];
-    if (domainScores['d1'] >= 4 && domainScores['d2'] >= 4) bridges.push("Ponte Cabeça → Pés: A névoa na Cabeça está drenando diretamente o dinheiro e a execução nos Pés.");
-    if (domainScores['d3'] >= 4 && domainScores['d6'] >= 4) bridges.push("Ponte Pulmões → Ventre: A tensão no peito durante o dia está empurrando você para gastos impulsivos como válvula de escape.");
-    if (domainScores['d4'] >= 4 && domainScores['d5'] >= 4) bridges.push("Ponte Coração ↔ Garganta: A carência de validação faz você engolir sapos até explodir ou falar na hora errada.");
-    if (domainScores['d7'] >= 4 && (domainScores['d1'] >= 4 || domainScores['d2'] >= 4)) bridges.push("Ponte Esqueleto → Cabeça/Pés: Arrastar situações mortas por medo de ficar só está travando sua mente e seu caixa.");
-
     const basePercent = (totalIGF / 42) * 100;
-    const frictionPenalty = (contradictions.length * 4) + (bridges.length * 5);
+    const frictionPenalty = (contradictions.length * 4) + (triads.length * 5);
     const realDensity = Math.min(100, Math.round(basePercent + frictionPenalty));
 
     document.getElementById('igfScore').innerText = `${totalIGF} / 42 pts`;
     document.getElementById('densityPercent').innerText = `${realDensity}%`;
     document.getElementById('matrixSignature').innerText = signatureParts.join('-');
+
+    const triadsBox = document.getElementById('labTriadsBox');
+    if (triads.length > 0) {
+      triadsBox.style.display = 'block';
+      document.getElementById('labTriadsList').innerHTML = triads.map(t => `<li class="inert-li">${t}</li>`).join('');
+    } else {
+      triadsBox.style.display = 'none';
+    }
 
     const contraBox = document.getElementById('labContradictionsBox');
     if (contradictions.length > 0) {
@@ -1446,32 +1467,25 @@
       contraBox.style.display = 'none';
     }
 
-    const bridgesBox = document.getElementById('labBridgesBox');
-    if (bridges.length > 0) {
-      bridgesBox.style.display = 'block';
-      document.getElementById('labBridgesList').innerHTML = bridges.map(b => `<li class="inert-li">${b}</li>`).join('');
-    } else {
-      bridgesBox.style.display = 'none';
-    }
-
     const maxVertical = Math.max(sulfurVertical, mercuryVertical, saltVertical);
     let triaText = "Os três eixos verticais estão equilibrados.";
     if (maxVertical > 0) {
-      if (saltVertical === maxVertical) triaText = `<strong>Cristalização na Matéria (Sal: ${saltVertical}/14):</strong> O bloqueio já desceu para o plano concreto (caixa, corpo e acordos reais). Exige corte imediato.`;
-      else if (mercuryVertical === maxVertical) triaText = `<strong>Ruído Mental (Mercúrio: ${mercuryVertical}/14):</strong> O travamento está na repetição mental e emocional (dúvida, mágoa ou projetos inacabados).`;
+      if (saltVertical === maxVertical) triaText = `<strong>Cristalização na Matéria (Sal: ${saltVertical}/14):</strong> O bloqueio já desceu para o plano físico e cotidiano (corpo, rotina, relações ou recursos). Exige corte imediato.`;
+      else if (mercuryVertical === maxVertical) triaText = `<strong>Ruído Mental e Emocional (Mercúrio: ${mercuryVertical}/14):</strong> O travamento está na repetição interna (dúvida, mágoa ou projetos inacabados).`;
       else triaText = `<strong>Desvio de Vontade (Enxofre: ${sulfurVertical}/14):</strong> A raiz está no comando inicial: paralisia antes de agir ou impulso cego.`;
     }
     document.getElementById('labTriaText').innerHTML = triaText;
 
-    // Lista limpa dos 7 Domínios no verso do exame
+    // Lista dos 7 Domínios com Microdinâmica no verso do exame
     const allDomainsList = document.getElementById('labAllDomainsList');
     allDomainsList.innerHTML = '';
     sortedDomains.forEach(d => {
       const s = domainScores['d' + d.id];
-      let cls = 'gold-li', label = 'SOBERANIA', note = d.leverageTip;
-      if (s >= 4) { cls = 'chaos-li'; label = 'ESTADO DE CAOS'; note = d.immediateAction; }
-      else if (s >= 2) { cls = 'inert-li'; label = 'INERTE (REPRESADO)'; note = d.inertTip; }
-      allDomainsList.innerHTML += `<li class="${cls}"><strong>${d.name} (${s}/6 — ${label}):</strong> ${note}</li>`;
+      const micro = analyzeDomainMicroDynamics(d);
+      let cls = 'gold-li', label = 'SOBERANIA';
+      if (s >= 4) { cls = 'chaos-li'; label = 'ESTADO DE CAOS'; }
+      else if (s >= 2) { cls = 'inert-li'; label = 'INERTE (REPRESADO)'; }
+      allDomainsList.innerHTML += `<li class="${cls}"><strong>${d.name} (${s}/6 — ${label}):</strong> ${micro}</li>`;
     });
 
     document.getElementById('resultsSection').style.display = 'block';
@@ -1505,49 +1519,27 @@
     }
   }
 
-  function copyPriorityCard() {
+  function copyUnifiedReport() {
     const name = document.getElementById('consulenteName').value.trim() || "Consulente";
-    const badge = document.getElementById('urgencyBadge').innerText;
-    const title = document.getElementById('heroTitle').innerText;
-    const why = document.getElementById('heroWhy').innerText;
-    const action = document.getElementById('heroAction').innerText;
-    const question = document.getElementById('heroQuestion').innerText;
+    const unifiedText =
+      `=== EXAME PONTEMETRIA ALQUÍMICA — ${name.toUpperCase()} ===\n` +
+      `IGF Bruto: ${document.getElementById('igfScore').innerText}` +
+      ` | Densidade Real: ${document.getElementById('densityPercent').innerText}` +
+      ` | Assinatura: ${document.getElementById('matrixSignature').innerText}\n\n` +
+      `1. PRIORIDADE DE INTERVENÇÃO:\n` +
+      `${document.getElementById('urgencyBadge').innerText}\n` +
+      `${document.getElementById('heroTitle').innerText} — ${document.getElementById('heroSubtitle').innerText}\n` +
+      `• Diagnóstico: ${document.getElementById('heroWhy').innerText}\n` +
+      `• Dinâmica Interna: ${document.getElementById('heroLever').innerText}\n` +
+      `• Comando Imediato: ${document.getElementById('heroAction').innerText}\n` +
+      `• Pergunta de Lucidez: ${document.getElementById('heroQuestion').innerText}\n\n` +
+      `2. RAIZ ESTRUTURAL (TRIA PRIMA):\n` +
+      `${document.getElementById('labTriaText').innerText}\n\n` +
+      `3. MAPA SISTÊMICO DOS 7 DOMÍNIOS:\n` +
+      `${document.getElementById('labAllDomainsList').innerText}\n` +
+      `=======================================================`;
 
-    const text = `LAUDO DE PRIORIDADE — ${name.toUpperCase()}
-${badge}
-${title}
-
-POR QUE ESTÁ TRAVANDO:
-${why}
-
-O QUE FAZER AGORA:
-${action}
-
-PERGUNTA DE LUCIDEZ:
-${question}`;
-
-    copyTextToClipboard(text, "Resumo de Prioridade copiado para o WhatsApp!");
-  }
-
-  function copyForNotebookLM() {
-    const name = document.getElementById('consulenteName').value.trim() || "Caso de Estudo";
-    const igf = document.getElementById('igfScore').innerText;
-    const density = document.getElementById('densityPercent').innerText;
-    const sig = document.getElementById('matrixSignature').innerText;
-    const allDomains = document.getElementById('labAllDomainsList').innerText.trim();
-    const tria = document.getElementById('labTriaText').innerText.trim();
-
-    const study = `=== EXAME PONTEMETRIA ALQUÍMICA ===
-Identificação: ${name}
-IGF: ${igf} | Densidade Real: ${density} | Assinatura: ${sig}
-
-RAIZ VERTICAL: ${tria}
-
-MAPA GERAL:
-${allDomains}
-===================================`;
-
-    copyTextToClipboard(study, "Exame completo copiado para o NotebookLM!");
+    copyTextToClipboard(unifiedText, "Laudo e Exame Completo copiados! Pronto para enviar no WhatsApp ou colar no NotebookLM.");
   }
 
   // Inicialização da Prancha
