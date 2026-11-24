@@ -13,165 +13,138 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Arial, sans-serif; }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg-wood); color: var(--text-main); line-height: 1.55; padding-bottom: 85px; }
-    header { background: linear-gradient(180deg, #1f1712 0%, #120e0b 100%); border-bottom: 1px solid var(--border-brass); padding: 18px 20px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.85); }
-    header h1 { color: var(--gold); font-size: 1.35rem; letter-spacing: 2.5px; text-transform: uppercase; }
-    header p { color: var(--text-muted); font-size: 0.82rem; margin-top: 2px; }
-    .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+    body { background: var(--bg-wood); color: var(--text-main); line-height: 1.55; padding-bottom: 75px; }
+    header { background: linear-gradient(180deg, #1f1712 0%, #120e0b 100%); border-bottom: 1px solid var(--border-brass); padding: 16px 20px; text-align: center; }
+    header h1 { color: var(--gold); font-size: 1.45rem; letter-spacing: 2.5px; text-transform: uppercase; }
+    header p { color: var(--text-muted); font-size: 0.85rem; margin-top: 2px; }
+    .container { max-width: 1340px; margin: 0 auto; padding: 20px; }
     .operator-bar { background: var(--bg-panel); border: 1px solid var(--border-brass); border-radius: 8px; padding: 14px; margin-bottom: 20px; display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; }
-    @media (max-width: 650px) { .operator-bar { grid-template-columns: 1fr; } }
-    input[type="text"] { background: #0d0a08; border: 1px solid var(--border-brass); color: var(--text-main); padding: 10px 14px; border-radius: 6px; font-size: 0.95rem; width: 100%; }
-    input[type="text"]:focus { outline: none; border-color: var(--gold); }
-    .btn { background: linear-gradient(135deg, #3b2d1b, #241b10); border: 1px solid var(--gold); color: var(--gold-light); padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.2s; }
+    @media (max-width: 700px) { .operator-bar { grid-template-columns: 1fr; } }
+    input[type="text"], textarea { background: #0d0a08; border: 1px solid var(--border-brass); color: var(--text-main); padding: 10px 14px; border-radius: 6px; font-size: 0.96rem; width: 100%; }
+    input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--gold); }
+    .btn { background: linear-gradient(135deg, #3b2d1b, #241b10); border: 1px solid var(--gold); color: var(--gold-light); padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.84rem; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.2s; }
     .btn:hover { background: var(--gold); color: #120e0b; }
     .btn-secondary { border-color: var(--border-brass); color: var(--text-muted); }
     .btn-secondary:hover { border-color: var(--text-main); color: var(--text-main); background: #2b221b; }
-    .btn-reveal { width: 100%; padding: 16px; font-size: 1rem; letter-spacing: 1.5px; margin-top: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.6); }
-
-    .board-wrapper { background: radial-gradient(circle at center, #241b14 0%, #140f0b 100%); border: 2px solid var(--border-brass); border-radius: 12px; padding: 18px; margin-bottom: 26px; box-shadow: inset 0 0 40px rgba(0,0,0,0.9), 0 8px 25px rgba(0,0,0,0.6); display: flex; flex-direction: column; align-items: center; }
-    .board-header { width: 100%; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); border-bottom: 1px solid rgba(92, 70, 40, 0.4); padding-bottom: 10px; margin-bottom: 14px; }
-    .svg-container { width: 100%; max-width: 680px; display: flex; justify-content: center; }
-    svg#pranchaSvg { width: 100%; height: auto; max-height: 620px; display: block; }
-
-    .legend-bar { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; margin-top: 12px; font-size: 0.8rem; color: var(--text-muted); }
+    .workspace-grid { display: grid; grid-template-columns: 640px 1fr; gap: 24px; align-items: start; }
+    @media (max-width: 1050px) { .workspace-grid { grid-template-columns: 1fr; } }
+    .board-wrapper { position: -webkit-sticky; position: sticky; top: 14px; z-index: 95; background: radial-gradient(circle at center, #241b14 0%, #120e0b 100%); border: 2px solid var(--border-brass); border-radius: 12px; padding: 16px; box-shadow: 0 12px 30px rgba(0,0,0,0.95); display: flex; flex-direction: column; align-items: center; }
+    .board-header { width: 100%; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.4px; color: var(--gold); border-bottom: 1px solid rgba(92, 70, 40, 0.4); padding-bottom: 8px; margin-bottom: 10px; }
+    #pranchaSVG { width: 100%; max-width: 600px; height: auto; display: block; }
+    @media (max-width: 1050px) { .board-wrapper { top: 0; padding: 8px 10px; margin-bottom: 16px; } #pranchaSVG { max-height: 44vh; max-width: 480px; } }
+    .legend-bar { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 10px; font-size: 0.8rem; color: var(--text-muted); }
     .legend-item { display: flex; align-items: center; gap: 6px; }
-    .dot-gold { width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff0a8, #b8860b); border: 1px solid #f3d576; }
-    .dot-silver { width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ffffff, #7f8c9a); border: 1px solid #cbd5e1; }
-    .dot-iron { width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #5c5753, #171514); border: 1px solid #8a817c; }
-
+    .dot-gold { width: 12px; height: 12px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff0a8, #b8860b); border: 1px solid #f3d576; }
+    .dot-silver { width: 12px; height: 12px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ffffff, #7f8c9a); border: 1px solid #cbd5e1; }
+    .dot-iron { width: 12px; height: 12px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #5c5753, #171514); border: 1px solid #8a817c; }
     .domain-card { background: var(--bg-card); border: 1px solid var(--border-brass); border-radius: 8px; padding: 18px; margin-bottom: 16px; }
-    .domain-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 10px; margin-bottom: 12px; gap: 8px; flex-wrap: wrap; }
-    .domain-header h2 { font-size: 1.05rem; color: var(--gold); }
+    .domain-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 9px; margin-bottom: 12px; }
+    .domain-header h2 { font-size: 1.08rem; color: var(--gold); }
     .domain-badge { font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; background: #0d0a08; border: 1px solid var(--border-brass); }
-    .question-item { display: flex; flex-direction: column; gap: 6px; padding: 12px 0; border-bottom: 1px dashed rgba(255,255,255,0.07); }
+    .question-item { display: flex; flex-direction: column; gap: 6px; padding: 11px 0; border-bottom: 1px dashed rgba(255,255,255,0.07); }
     .question-item:last-child { border-bottom: none; }
-    .q-text { font-size: 0.96rem; font-weight: 600; color: var(--text-main); }
-    .q-hint { font-size: 0.82rem; color: #c9b99f; font-style: italic; margin-bottom: 4px; }
+    .q-text { font-size: 0.98rem; font-weight: 600; color: var(--text-main); }
+    .q-hint { font-size: 0.84rem; color: #c9b99f; font-style: italic; margin-bottom: 4px; }
     .options-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    @media (max-width: 550px) { .options-group { grid-template-columns: 1fr; } }
-    .opt-btn { background: #140f0c; border: 1px solid var(--border-brass); color: var(--text-muted); padding: 9px 8px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: all 0.15s; text-align: center; }
+    .opt-btn { background: #140f0c; border: 1px solid var(--border-brass); color: var(--text-muted); padding: 10px 8px; border-radius: 6px; cursor: pointer; font-size: 0.82rem; font-weight: 600; transition: all 0.15s; text-align: center; }
     .opt-btn:hover { border-color: var(--gold); color: var(--text-main); }
     .opt-btn.selected-0 { background: rgba(212, 175, 55, 0.22); border-color: #f3d576; color: #fff0a8; }
     .opt-btn.selected-1 { background: rgba(184, 194, 204, 0.22); border-color: #cbd5e1; color: #ffffff; }
     .opt-btn.selected-2 { background: rgba(30, 27, 25, 0.95); border-color: #a6998a; color: #e6dfd5; box-shadow: inset 0 0 10px rgba(0,0,0,0.9); }
-
-    /* RESULTADO HIERÁRQUICO DO OPERADOR */
-    .results-section { display: none; margin-top: 28px; }
-
-    /* Bloco 1: Onde Está Acusando a Dor (Sempre Primeiro) */
-    .pain-hero-card { background: linear-gradient(180deg, #241412 0%, #160f0d 100%); border: 2px solid var(--chaos-alert); border-radius: 12px; padding: 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.85); margin-bottom: 16px; }
+    .results-section { display: none; margin-top: 30px; width: 100%; }
+    .pain-hero-card { background: linear-gradient(180deg, #241412 0%, #160f0d 100%); border: 2px solid var(--chaos-alert); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.85); margin-bottom: 18px; }
     .pain-hero-card.sovereign-mode { background: linear-gradient(180deg, #241e12 0%, #16120d 100%); border-color: var(--gold); }
-    .pain-tag { display: inline-block; background: var(--chaos-alert); color: #fff; font-weight: 800; font-size: 0.74rem; letter-spacing: 1.4px; text-transform: uppercase; padding: 5px 12px; border-radius: 4px; margin-bottom: 10px; }
+    .pain-tag { display: inline-block; background: var(--chaos-alert); color: #fff; font-weight: 800; font-size: 0.76rem; letter-spacing: 1.4px; text-transform: uppercase; padding: 6px 12px; border-radius: 4px; margin-bottom: 10px; }
     .pain-tag.gold-tag { background: var(--gold); color: #120e0b; }
-    .pain-title { font-size: 1.75rem; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
-    .pain-sub { font-size: 0.95rem; color: #f2ece4; }
-
-    /* Bloco 2: Termômetro de Porcentagem (Logo Abaixo da Dor) */
-    .thermo-card { background: var(--bg-panel); border: 1px solid var(--border-brass); border-radius: 10px; padding: 20px; margin-bottom: 16px; }
-    .thermo-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
-    .thermo-pct { font-size: 2rem; font-weight: 800; color: var(--gold-light); }
-    .thermo-band { font-size: 0.88rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #ff9c94; }
+    .pain-title { font-size: 1.85rem; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+    .pain-sub { font-size: 0.98rem; color: #f2ece4; }
+    .results-grid-desktop { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+    @media (max-width: 900px) { .results-grid-desktop { grid-template-columns: 1fr; } }
+    .thermo-card { background: var(--bg-panel); border: 1px solid var(--border-brass); border-radius: 10px; padding: 20px; }
+    .thermo-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .thermo-pct { font-size: 2.1rem; font-weight: 800; color: var(--gold-light); }
+    .thermo-band { font-size: 0.86rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #ff9c94; }
     .thermo-bar-bg { width: 100%; height: 12px; background: #0d0a08; border-radius: 6px; border: 1px solid #3d2d1a; overflow: hidden; margin-bottom: 12px; }
     .thermo-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #d4af37 0%, #cbd5e1 45%, #dc2626 85%); transition: width 0.5s ease; }
-    .thermo-arg { font-size: 0.95rem; color: #e6dfd5; margin-bottom: 10px; }
-    .thermo-meta { font-size: 0.8rem; color: var(--text-muted); font-family: monospace; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 8px; }
-
-    /* Bloco 3: Relações, Hipóteses e Dualidade */
-    .relations-card { background: var(--bg-card); border: 1px solid var(--border-brass); border-radius: 10px; padding: 20px; margin-bottom: 16px; }
-    .relations-card h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); margin-bottom: 12px; }
-    .rel-list { list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.92rem; color: #f2ece4; }
-    .rel-list li { background: #140f0c; padding: 12px 14px; border-radius: 6px; border-left: 3px solid var(--gold); }
-    .duality-box { margin-top: 14px; padding: 14px; background: rgba(203, 213, 225, 0.08); border: 1px solid var(--silver); border-radius: 6px; font-size: 0.92rem; color: #ffffff; }
-
-    /* Bloco 4: Lista Limpa dos 7 Domínios */
-    .summary-panel { background: var(--bg-panel); border: 1px solid var(--border-brass); border-radius: 10px; padding: 18px; margin-bottom: 16px; }
+    .thermo-arg { font-size: 0.96rem; color: #e6dfd5; margin-bottom: 12px; }
+    .thermo-meta { font-size: 0.84rem; color: var(--text-muted); font-family: monospace; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 8px; }
+    .synthesis-card { background: var(--bg-card); border: 1px solid var(--border-brass); border-radius: 10px; padding: 20px; }
+    .synthesis-card h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); margin-bottom: 10px; }
+    .synthesis-text { font-size: 0.98rem; color: #f7f3ed; line-height: 1.65; }
+    .duality-box { margin-top: 14px; padding: 14px; background: rgba(203, 213, 225, 0.08); border: 1px solid var(--silver); border-radius: 6px; font-size: 0.94rem; color: #ffffff; }
+    .summary-panel { background: var(--bg-panel); border: 1px solid var(--border-brass); border-radius: 10px; padding: 20px; margin-bottom: 18px; }
     .summary-panel h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); margin-bottom: 12px; border-bottom: 1px solid rgba(92, 70, 40, 0.4); padding-bottom: 8px; }
-    .clean-list { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.92rem; color: #e6dfd5; }
-    .clean-list li { padding: 8px 12px; background: #140f0c; border-radius: 5px; border-left: 3px solid var(--border-brass); display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .clean-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.94rem; color: #e6dfd5; }
+    @media (max-width: 850px) { .clean-list { grid-template-columns: 1fr; } }
+    .clean-list li { padding: 10px 12px; background: #140f0c; border-radius: 6px; border-left: 3px solid var(--border-brass); display: flex; justify-content: space-between; align-items: center; }
     .clean-list li.st-chaos { border-left-color: var(--chaos-alert); }
     .clean-list li.st-inert { border-left-color: var(--silver); }
     .clean-list li.st-sov { border-left-color: var(--gold); }
-
-    /* Bloco 5: Telemetria Técnica na Base */
-    .telemetry-base { background: #0d0a08; border: 1px solid #382a18; border-radius: 8px; padding: 16px; margin-bottom: 20px; font-size: 0.84rem; color: var(--text-muted); line-height: 1.7; }
-    .telemetry-base h5 { color: var(--gold); text-transform: uppercase; letter-spacing: 1px; font-size: 0.78rem; margin-bottom: 8px; }
-
+    .confirm-card { background: #17120c; border: 1px solid var(--gold); border-radius: 10px; padding: 20px; margin-bottom: 18px; }
+    .confirm-card h4 { font-size: 0.86rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold-light); margin-bottom: 10px; }
+    .confirm-guide { display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; color: #c9b99f; margin-bottom: 14px; line-height: 1.55; }
+    .confirm-guide strong { color: #fff; }
     .final-copy-bar { text-align: center; margin-top: 20px; }
     .status-0 { color: #f3d576; border-color: #d4af37; }
     .status-1 { color: #e2e8f0; border-color: #94a3b8; }
     .status-2 { color: #ff9c94; border-color: #c93b2b; }
-
-    /* Toast / Aviso sem alert() */
-    .toast-notice { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #241412; border: 1px solid var(--chaos-alert); color: #fff; padding: 12px 20px; border-radius: 8px; font-size: 0.88rem; font-weight: 600; z-index: 999; box-shadow: 0 8px 24px rgba(0,0,0,0.85); display: none; }
-
-    .nav-floats { position: fixed; bottom: 18px; right: 18px; display: flex; flex-direction: column; gap: 8px; z-index: 200; }
-    .float-btn { background: #1f1712; border: 1px solid var(--gold); color: var(--gold-light); padding: 9px 12px; border-radius: 6px; cursor: pointer; font-size: 0.78rem; font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,0.8); text-transform: uppercase; }
+    .nav-floats { position: fixed; bottom: 8px; right: 8px; display: flex; flex-direction: column; gap: 4px; z-index: 200; opacity: 0.85; }
+    .nav-floats:hover { opacity: 1; }
+    .float-btn { background: #1a130e; border: 1px solid var(--gold); color: var(--gold-light); padding: 5px 8px; border-radius: 4px; cursor: pointer; font-size: 0.68rem; font-weight: 700; box-shadow: 0 2px 8px rgba(0,0,0,0.9); text-transform: uppercase; letter-spacing: 0.4px; }
     .float-btn:hover { background: var(--gold); color: #120e0b; }
   </style>
 </head>
-<body id="topPage">
+<body id="pageTop">
+<header>
+  <h1>Prancha Alquímica</h1>
+  <p>Planta Geométrica de Telemetria • Engenharia do Corpo Soberano</p>
+</header>
 
-  <div id="toastNotice" class="toast-notice"></div>
+<div class="container">
+  <div class="operator-bar">
+    <input type="text" id="consulenteName" placeholder="Nome do Consulente (ou Identificação)..." />
+    <button class="btn btn-secondary" onclick="runSimulation()">Simular Cenário</button>
+    <button class="btn btn-secondary" onclick="resetBoard()">Zerar Prancha</button>
+  </div>
 
-  <header>
-    <h1>Prancha Alquímica</h1>
-    <p>Planta Geométrica de Telemetria • Engenharia do Corpo Soberano</p>
-  </header>
-
-  <div class="container">
-    <!-- Barra de Operador -->
-    <div class="operator-bar">
-      <input type="text" id="consulenteName" placeholder="Nome ou Código do Consulente..." />
-      <button type="button" class="btn btn-secondary" onclick="runSimulation()">Simular Cenário</button>
-      <button type="button" class="btn btn-secondary" onclick="resetBoard()">Zerar Prancha</button>
-    </div>
-
-    <!-- Mesa Geométrica SVG -->
-    <div class="board-wrapper">
+  <div class="workspace-grid">
+    <div class="board-wrapper" id="stickyBoard">
       <div class="board-header">
-        <span>Prancha Alquímica — Visão Geral da Mesa</span>
+        <span>Prancha Alquímica — Visão da Mesa</span>
         <span id="progressText">0 / 21 Cavidades</span>
       </div>
 
-      <div class="svg-container">
-        <svg id="pranchaSvg" viewBox="0 0 680 630" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="gradEmpty" cx="35%" cy="30%" r="70%">
-              <stop offset="0%" stop-color="#2a211b" />
-              <stop offset="100%" stop-color="#0d0a08" />
-            </radialGradient>
-            <radialGradient id="gradGold" cx="35%" cy="30%" r="70%">
-              <stop offset="0%" stop-color="#fff4b8" />
-              <stop offset="55%" stop-color="#d4af37" />
-              <stop offset="100%" stop-color="#7a5908" />
-            </radialGradient>
-            <radialGradient id="gradSilver" cx="35%" cy="30%" r="70%">
-              <stop offset="0%" stop-color="#ffffff" />
-              <stop offset="55%" stop-color="#cbd5e1" />
-              <stop offset="100%" stop-color="#64748b" />
-            </radialGradient>
-            <radialGradient id="gradIron" cx="35%" cy="30%" r="70%">
-              <stop offset="0%" stop-color="#6b645e" />
-              <stop offset="55%" stop-color="#292522" />
-              <stop offset="100%" stop-color="#0a0908" />
-            </radialGradient>
-          </defs>
+      <svg id="pranchaSVG" viewBox="0 0 680 680">
+        <defs>
+          <radialGradient id="gradGold" cx="35%" cy="30%" r="70%"><stop offset="0%" stop-color="#fff4b8" /><stop offset="55%" stop-color="#d4af37" /><stop offset="100%" stop-color="#7a5c12" /></radialGradient>
+          <radialGradient id="gradSilver" cx="35%" cy="30%" r="70%"><stop offset="0%" stop-color="#ffffff" /><stop offset="55%" stop-color="#b8c2cc" /><stop offset="100%" stop-color="#525c66" /></radialGradient>
+          <radialGradient id="gradIron" cx="35%" cy="30%" r="70%"><stop offset="0%" stop-color="#6b645e" /><stop offset="50%" stop-color="#262220" /><stop offset="100%" stop-color="#0a0908" /></radialGradient>
+          <radialGradient id="gradEmpty" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#0d0a08" /><stop offset="100%" stop-color="#1c1510" /></radialGradient>
+          <radialGradient id="gradEther" cx="45%" cy="40%" r="65%"><stop offset="0%" stop-color="#2e2318" /><stop offset="65%" stop-color="#17110c" /><stop offset="100%" stop-color="#0a0806" /></radialGradient>
+        </defs>
 
-          <!-- Anéis Externos Decorativos -->
-          <circle cx="340" cy="315" r="275" fill="none" stroke="#2c2115" stroke-width="1" />
-          <circle cx="340" cy="315" r="268" fill="none" stroke="#3d2d1a" stroke-width="0.8" stroke-dasharray="2,6" />
+        <rect x="10" y="10" width="660" height="660" rx="10" fill="#17120e" stroke="#6e5430" stroke-width="3" />
+        <rect x="26" y="26" width="628" height="628" rx="6" fill="none" stroke="#4a371f" stroke-width="1.5" />
 
-          <!-- Camada Dinâmica dos 7 Domínios e 21 Cavidades -->
-          <g id="orbitLayer"></g>
+        <g transform="translate(42, 42)"><rect width="54" height="54" rx="4" fill="#0f0c09" stroke="#d4af37" stroke-width="2" /><polygon points="27,11 43,40 11,40" fill="none" stroke="#f3d576" stroke-width="2.2" /><line x1="15" y1="26" x2="39" y2="26" stroke="#f3d576" stroke-width="2.2" /></g>
+        <g transform="translate(584, 42)"><rect width="54" height="54" rx="4" fill="#0f0c09" stroke="#d4af37" stroke-width="2" /><polygon points="27,11 43,40 11,40" fill="none" stroke="#f3d576" stroke-width="2.2" /></g>
+        <g transform="translate(42, 584)"><rect width="54" height="54" rx="4" fill="#0f0c09" stroke="#d4af37" stroke-width="2" /><polygon points="27,43 43,14 11,14" fill="none" stroke="#f3d576" stroke-width="2.2" /></g>
+        <g transform="translate(584, 584)"><rect width="54" height="54" rx="4" fill="#0f0c09" stroke="#d4af37" stroke-width="2" /><polygon points="27,43 43,14 11,14" fill="none" stroke="#f3d576" stroke-width="2.2" /><line x1="15" y1="28" x2="39" y2="28" stroke="#f3d576" stroke-width="2.2" /></g>
 
-          <!-- Núcleo Central IGF -->
-          <circle cx="340" cy="315" r="66" fill="#140f0c" stroke="#5c4628" stroke-width="2" />
-          <circle cx="340" cy="315" r="58" fill="none" stroke="#d4af37" stroke-width="1" stroke-dasharray="4,3" />
-          <text x="340" y="294" fill="#a6998a" font-size="9.5" font-weight="bold" letter-spacing="1.5" text-anchor="middle">IGF GLOBAL</text>
-          <text id="centerScoreText" x="340" y="317" fill="#f3d576" font-size="18" font-weight="bold" text-anchor="middle">0/42</text>
-          <text id="centerPercentText" x="340" y="337" fill="#cbd5e1" font-size="12" font-weight="bold" text-anchor="middle">0%</text>
-        </svg>
-      </div>
+        <circle cx="340" cy="315" r="56" fill="url(#gradEther)" stroke="#d4af37" stroke-width="2.2" />
+        <circle cx="340" cy="315" r="49" fill="none" stroke="#d4af37" stroke-width="0.8" stroke-dasharray="3,3" />
+        <polygon points="340,270 379,337 301,337" fill="none" stroke="#d4af37" stroke-width="0.6" opacity="0.28" />
+        <polygon points="340,360 379,293 301,293" fill="none" stroke="#d4af37" stroke-width="0.6" opacity="0.28" />
+        <text x="340" y="291" fill="#d4af37" font-size="9" font-weight="bold" text-anchor="middle" letter-spacing="1.4">IGF TOTAL</text>
+        <text id="centerScoreText" x="340" y="318" fill="#f3d576" font-size="21" font-weight="800" text-anchor="middle">0/42</text>
+        <text id="centerPercentText" x="340" y="339" fill="#c9b99f" font-size="11.5" font-weight="bold" text-anchor="middle">0%</text>
+
+        <g id="orbitLayer"></g>
+
+        <g transform="translate(210, 610)"><circle cx="0" cy="0" r="28" fill="#0f0c09" stroke="#d4af37" stroke-width="1.8" /><polygon points="0,-15 10,2 -10,2" fill="none" stroke="#d4af37" stroke-width="1.5" /><line x1="0" y1="2" x2="0" y2="15" stroke="#d4af37" stroke-width="1.5" /><line x1="-6" y1="8.5" x2="6" y2="8.5" stroke="#d4af37" stroke-width="1.5" /></g>
+        <g transform="translate(340, 610)"><circle cx="0" cy="0" r="28" fill="#0f0c09" stroke="#b8c2cc" stroke-width="1.8" /><circle cx="0" cy="-3" r="7" fill="none" stroke="#b8c2cc" stroke-width="1.5" /><path d="M -7,-12 A 7,7 0 0,0 7,-12" fill="none" stroke="#b8c2cc" stroke-width="1.5" /><line x1="0" y1="4" x2="0" y2="16" stroke="#b8c2cc" stroke-width="1.5" /><line x1="-6" y1="10.5" x2="6" y2="10.5" stroke="#b8c2cc" stroke-width="1.5" /></g>
+        <g transform="translate(470, 610)"><circle cx="0" cy="0" r="28" fill="#0f0c09" stroke="#8a817c" stroke-width="1.8" /><circle cx="0" cy="0" r="11" fill="none" stroke="#a6998a" stroke-width="1.5" /><line x1="-11" y1="0" x2="11" y2="0" stroke="#a6998a" stroke-width="1.5" /></g>
+      </svg>
 
       <div class="legend-bar">
         <div class="legend-item"><span class="dot-gold"></span> Dourada: Raro (0)</div>
@@ -180,713 +153,776 @@
       </div>
     </div>
 
-    <!-- Questionário dos 7 Domínios -->
-    <div id="questionsContainer"></div>
-
-    <!-- Botão Principal de Leitura -->
-    <button type="button" class="btn btn-reveal" onclick="generateReport()">Revelar Raio-X da Prancha</button>
-
-    <!-- Seção de Resultados Hierárquicos -->
-    <div id="resultsSection" class="results-section">
-      <!-- Bloco 1: Dor Principal -->
-      <div id="painCard" class="pain-hero-card">
-        <span id="painTag" class="pain-tag">🎯 ONDE ESTÁ ACUSANDO A DOR PRINCIPAL</span>
-        <div id="painTitle" class="pain-title">—</div>
-        <div id="painSub" class="pain-sub">—</div>
-      </div>
-
-      <!-- Bloco 2: Termômetro -->
-      <div class="thermo-card">
-        <div class="thermo-header">
-          <div>
-            <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">
-              Índice de Drenagem Global (Quanto menor no retorno, maior a Soberania)
-            </div>
-            <div id="thermoPct" class="thermo-pct">0%</div>
-          </div>
-          <div id="thermoBand" class="thermo-band">SOBERANIA CONSOLIDADA</div>
-        </div>
-        <div class="thermo-bar-bg">
-          <div id="thermoBarFill" class="thermo-bar-fill"></div>
-        </div>
-        <div id="thermoArg" class="thermo-arg">—</div>
-        <div id="thermoMeta" class="thermo-meta">IGF Bruto: 0/42 | Assinatura da Matriz: 000-000-000-000-000-000-000</div>
-      </div>
-
-      <!-- Bloco 3: Relações e Hipóteses -->
-      <div class="relations-card">
-        <h4>🔗 Relações e Hipóteses do Eixo Principal (Para Conduzir a Leitura)</h4>
-        <ul id="relationsList" class="rel-list"></ul>
-        <div id="dualityBox" class="duality-box" style="display: none;"></div>
-      </div>
-
-      <!-- Bloco 4: Lista Limpa dos 7 Domínios -->
-      <div class="summary-panel">
-        <h4>Mapa dos 7 Domínios (0–2 Soberania | 3–4 Inerte | 5–6 Caos)</h4>
-        <ul id="cleanDomainsList" class="clean-list"></ul>
-      </div>
-
-      <!-- Bloco 5: Telemetria Técnica -->
-      <div class="telemetry-base">
-        <h5>Telemetria Técnica de Registro (Base para Retorno e Caderno 2)</h5>
-        <div id="telemetryDetails">—</div>
-      </div>
-
-      <div class="final-copy-bar">
-        <button type="button" id="copyBtn" class="btn" onclick="copyUnifiedReport()">
-          Copiar Raio-X + Telemetria Completa (Caderno 2 / WhatsApp)
+    <div>
+      <div id="questionsContainer"></div>
+      <div style="text-align: center; margin-top: 20px;" id="pageBottom">
+        <button class="btn" style="padding: 15px 34px; font-size: 1rem; width: 100%;" onclick="generateReport()">
+          Revelar Raio-X da Prancha
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Navegação Rápida Flutuante -->
-  <div class="nav-floats">
-    <button type="button" class="float-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Topo</button>
-    <button type="button" class="float-btn" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})">↓ Fim</button>
+  <div class="results-section" id="resultsSection">
+    <div class="pain-hero-card" id="painCard">
+      <div class="pain-tag" id="painTag">🎯 ONDE ESTÁ ACUSANDO A DOR PRINCIPAL</div>
+      <div class="pain-title" id="painTitle"></div>
+      <div class="pain-sub" id="painSub"></div>
+    </div>
+
+    <div class="results-grid-desktop">
+      <div class="thermo-card">
+        <div class="thermo-header">
+          <div>
+            <span style="font-size: 0.74rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); display: block;">Índice de Drenagem Global (Quanto menor no retorno, maior a Soberania)</span>
+            <span class="thermo-pct" id="thermoPct">0%</span>
+          </div>
+          <span class="thermo-band" id="thermoBand">SOBERANIA CONSOLIDADA</span>
+        </div>
+        <div class="thermo-bar-bg">
+          <div class="thermo-bar-fill" id="thermoBarFill"></div>
+        </div>
+        <div class="thermo-arg" id="thermoArg"></div>
+        <div class="thermo-meta" id="thermoMeta"></div>
+      </div>
+
+      <div class="synthesis-card">
+        <h4>🧠 Síntese Dinâmica do Resultado (Cruzamento Real)</h4>
+        <div class="synthesis-text" id="synthesisText"></div>
+        <div class="duality-box" id="dualityBox" style="display:none;"></div>
+      </div>
+    </div>
+
+    <div class="summary-panel">
+      <h4>Mapa dos 7 Domínios (0–2 Soberania | 3–4 Inerte | 5–6 Caos)</h4>
+      <ul class="clean-list" id="cleanDomainsList"></ul>
+    </div>
+
+    <div class="confirm-card">
+      <h4>🎙️ Ancoragem de Realidade (3 Perguntas Anti-Evasão — Sem Spoiler do Remédio)</h4>
+      <div class="confirm-guide" id="dynamicConfirmQuestions"></div>
+      <textarea id="sessionNotes" rows="3" placeholder="Anote aqui o fato real, a reação e o que já falhou (vai direto para o Caderno IA calibrar o remédio)..."></textarea>
+    </div>
+
+    <div class="final-copy-bar">
+      <button class="btn" id="copyBtn" style="padding: 15px 32px; font-size: 0.96rem;" onclick="copyUnifiedReport()">
+        Copiar Raio-X + Confirmação para Caderno IA
+      </button>
+    </div>
   </div>
+</div>
 
-  <script>
-    const domainsData = [
-      {
-        id: 1, shortName: "CABEÇA", name: "1. Cabeça", subtitle: "Direção e Filtro",
-        questions: [
-          { id: 1, text: "1. Você trava e pensa demais antes de agir?", hint: "Ficar analisando todos os cenários possíveis e acabar adiando o que precisa ser feito." },
-          { id: 2, text: "2. Você se arrepende das escolhas que faz?", hint: "Tomar uma decisão e logo depois ficar duvidando ou se culpando pelo caminho escolhido." },
-          { id: 3, text: "3. Sua mente fica confusa em momentos importantes?", hint: "Sentir um 'branco' ou embaralhamento mental justamente na hora de resolver algo decisivo." }
-        ]
-      },
-      {
-        id: 2, shortName: "PÉS", name: "2. Pés", subtitle: "Execução e Retenção",
-        questions: [
-          { id: 4, text: "4. Você trabalha muito e sente que não avança?", hint: "Terminar o dia exausto de tanto fazer esforço, mas sentir que a vida não sai do lugar." },
-          { id: 5, text: "5. Você começa projetos e não consegue finalizar?", hint: "Iniciar planos, hábitos ou tarefas com empolgação, mas abandonar no meio do caminho." },
-          { id: 6, text: "6. Seu dinheiro entra, mas some sem você ver?", hint: "Perceber que os recursos chegam até você, mas escorrem rápido sem construir reserva." }
-        ]
-      },
-      {
-        id: 3, shortName: "PULMÕES", name: "3. Pulmões", subtitle: "Fronteira e Vitalidade",
-        questions: [
-          { id: 7, text: "7. Você vive em estado de alerta e desconfiança?", hint: "Estar sempre armado, esperando que alguém vá te prejudicar, trair ou tirar vantagem." },
-          { id: 8, text: "8. Você acha difícil confiar nas intenções das pessoas?", hint: "Duvidar até de gestos simples na família, nas relações ou no trabalho, sempre buscando segunda intenção." },
-          { id: 9, text: "9. Você sente ansiedade ou aperto no peito sem motivo?", hint: "Sentir uma angústia física ou peso na respiração mesmo quando não há nenhum problema acontecendo." }
-        ]
-      },
-      {
-        id: 4, shortName: "GARGANTA", name: "4. Garganta", subtitle: "Palavra e Limite",
-        questions: [
-          { id: 10, text: "10. Você entra em conflitos e discussões facilmente?", hint: "Comprar brigas por detalhes, perder a paciência rápido ou cair em provocações verbais." },
-          { id: 11, text: "11. Você sente que fala, mas ninguém te ouve?", hint: "Sentir que precisa repetir as coisas várias vezes dentro de casa ou no trabalho para ser levado a sério." },
-          { id: 12, text: "12. Você fala as coisas por impulso e se arrepende?", hint: "Soltar palavras duras ou promessas no calor do momento e sentir peso na consciência logo depois." }
-        ]
-      },
-      {
-        id: 5, shortName: "CORAÇÃO", name: "5. Coração", subtitle: "Autonomia Emocional",
-        questions: [
-          { id: 13, text: "13. Você se apega e se dependura nas pessoas rápido demais?", hint: "Criar expectativas altas logo no início ou colocar sua felicidade nas mãos de outra pessoa." },
-          { id: 14, text: "14. Você sofre intensamente e não consegue desapegar?", hint: "Ficar preso a términos, rejeições ou frustrações afetivas por muito tempo sem conseguir virar a página." },
-          { id: 15, text: "15. Suas emoções mudam de extremo do nada?", hint: "Ir da alegria total para a irritação ou tristeza profunda em questão de minutos por pequenos gatilhos." }
-        ]
-      },
-      {
-        id: 6, shortName: "VENTRE", name: "6. Ventre", subtitle: "Impulso e Contenção",
-        questions: [
-          { id: 16, text: "16. Você age puramente por impulso cego?", hint: "Fazer coisas no calor da emoção sem medir consequências (decidir na pressa, explodir ou agir no automático)." },
-          { id: 17, text: "17. Você gasta e consome para tapar um vazio emocional?", hint: "Comprar coisas sem precisar, comer demais ou buscar distrações para aliviar tédio, carência ou estresse." },
-          { id: 18, text: "18. Você busca o prazer imediato mesmo sabendo que vai se prejudicar?", hint: "Escolher o alívio ou a recompensa de agora mesmo sabendo que isso vai sabotar sua saúde, caixa ou relação depois." }
-        ]
-      },
-      {
-        id: 7, shortName: "ESQUELETO", name: "7. Esqueleto", subtitle: "Estrutura e Corte",
-        questions: [
-          { id: 19, text: "19. Você arrasta e mantém situações que já morreram?", hint: "Continuar em relacionamentos, amizades, hábitos ou compromissos que já acabaram por dentro há muito tempo." },
-          { id: 20, text: "20. Você guarda mágoas e ressentimentos do passado?", hint: "Carregar rancor ou lembranças de ofensas antigas que pesam nas suas costas e travam o seu presente." },
-          { id: 21, text: "21. Você aceita migalhas afetivas apenas para não ficar só?", hint: "Se contentar com o mínimo de atenção, respeito ou retorno apenas pelo medo da solidão ou da mudança." }
-        ]
-      }
-    ];
+<div class="nav-floats">
+  <button class="float-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Topo</button>
+  <button class="float-btn" onclick="document.getElementById('pageBottom').scrollIntoView({behavior: 'smooth'})">↓ Fim</button>
+</div>
 
-    let answers = {};
-    let audioCtx = null;
-    let fullExportBuffer = "";
+<script>
+  const SVG_NS = "http:" + "//www.w3.org/2000/svg";
 
-    function showToast(msg) {
-      const toast = document.getElementById('toastNotice');
-      toast.innerText = msg;
-      toast.style.display = 'block';
-      clearTimeout(toast._timer);
-      toast._timer = setTimeout(() => {
-        toast.style.display = 'none';
-      }, 3200);
+  const domainsData = [
+    {
+      id: 1, shortName: "CABEÇA", name: "1. Cabeça", subtitle: "Direção e Filtro",
+      questions: [
+        { id: 1, text: "1. Você trava e pensa demais antes de agir?", hint: "Ficar analisando todos os cenários possíveis e acabar adiando o que precisa ser feito." },
+        { id: 2, text: "2. Você se arrepende das escolhas que faz?", hint: "Tomar uma decisão e logo depois ficar duvidando ou se culpando pelo caminho escolhido." },
+        { id: 3, text: "3. Sua mente fica confusa em momentos importantes?", hint: "Sentir um 'branco' ou embaralhamento mental justamente na hora de resolver algo decisivo." }
+      ]
+    },
+    {
+      id: 2, shortName: "PÉS", name: "2. Pés", subtitle: "Execução e Retenção",
+      questions: [
+        { id: 4, text: "4. Você trabalha muito e sente que não avança?", hint: "Terminar o dia exausto de tanto fazer esforço, mas sentir que a vida não sai do lugar." },
+        { id: 5, text: "5. Você começa projetos e não consegue finalizar?", hint: "Iniciar planos, hábitos ou tarefas com empolgação, mas abandonar no meio do caminho." },
+        { id: 6, text: "6. Seu dinheiro entra, mas some sem você ver?", hint: "Perceber que os recursos chegam até você, mas escorrem rápido sem construir reserva." }
+      ]
+    },
+    {
+      id: 3, shortName: "PULMÕES", name: "3. Pulmões", subtitle: "Fronteira e Vitalidade",
+      questions: [
+        { id: 7, text: "7. Você vive em estado de alerta e desconfiança?", hint: "Estar sempre armado, esperando que alguém vá te prejudicar, trair ou tirar vantagem." },
+        { id: 8, text: "8. Você acha difícil confiar nas intenções das pessoas?", hint: "Duvidar até de gestos simples na família, nas relações ou no trabalho, sempre buscando segunda intenção." },
+        { id: 9, text: "9. Você sente ansiedade ou aperto no peito sem motivo?", hint: "Sentir uma angústia física ou peso na respiração mesmo quando não há nenhum problema acontecendo." }
+      ]
+    },
+    {
+      id: 4, shortName: "GARGANTA", name: "4. Garganta", subtitle: "Palavra e Limite",
+      questions: [
+        { id: 10, text: "10. Você entra em conflitos e discussões facilmente?", hint: "Comprar brigas por detalhes, perder a paciência rápido ou cair em provocações verbais." },
+        { id: 11, text: "11. Você sente que fala, mas ninguém te ouve?", hint: "Sentir que precisa repetir as coisas várias vezes dentro de casa ou no trabalho para ser levado a sério." },
+        { id: 12, text: "12. Você fala as coisas por impulso e se arrepende?", hint: "Soltar palavras duras ou promessas no calor do momento e sentir peso na consciência logo depois." }
+      ]
+    },
+    {
+      id: 5, shortName: "CORAÇÃO", name: "5. Coração", subtitle: "Autonomia Emocional",
+      questions: [
+        { id: 13, text: "13. Você se apega e se dependura nas pessoas rápido demais?", hint: "Criar expectativas altas logo no início ou colocar sua felicidade nas mãos de outra pessoa." },
+        { id: 14, text: "14. Você sofre intensamente e não consegue desapegar?", hint: "Ficar preso a términos, rejeições ou frustrações afetivas por muito tempo sem conseguir virar a página." },
+        { id: 15, text: "15. Suas emoções mudam de extremo do nada?", hint: "Ir da alegria total para a irritação ou tristeza profunda em questão de minutos por pequenos gatilhos." }
+      ]
+    },
+    {
+      id: 6, shortName: "VENTRE", name: "6. Ventre", subtitle: "Impulso e Contenção",
+      questions: [
+        { id: 16, text: "16. Você age puramente por impulso cego?", hint: "Fazer coisas no calor da emoção sem medir consequências (decidir na pressa, explodir ou agir no automático)." },
+        { id: 17, text: "17. Você gasta e consome para tapar um vazio emocional?", hint: "Comprar coisas sem precisar, comer demais ou buscar distrações para aliviar tédio, carência ou estresse." },
+        { id: 18, text: "18. Você busca o prazer imediato mesmo sabendo que vai se prejudicar?", hint: "Escolher o alívio ou a recompensa de agora mesmo sabendo que isso vai sabotar sua saúde, caixa ou relação depois." }
+      ]
+    },
+    {
+      id: 7, shortName: "ESQUELETO", name: "7. Esqueleto", subtitle: "Estrutura e Corte",
+      questions: [
+        { id: 19, text: "19. Você arrasta e mantém situações que já morreram?", hint: "Continuar em relacionamentos, amizades, hábitos ou compromissos que já acabaram por dentro há muito tempo." },
+        { id: 20, text: "20. Você guarda mágoas e ressentimentos do passado?", hint: "Carregar rancor ou lembranças de ofensas antigas que pesam nas suas costas e travam o seu presente." },
+        { id: 21, text: "21. Você aceita migalhas afetivas apenas para não ficar só?", hint: "Se contentar com o mínimo de atenção, respeito ou retorno apenas pelo medo da solidão ou da mudança." }
+      ]
     }
+  ];
 
-    function playMetallicClack(intensity) {
-      try {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        const now = audioCtx.currentTime;
-        const strikes = intensity === 2 ? 2 : 1;
+  let answers = {};
+  let audioCtx = null;
+  let lastCalcData = null;
 
-        for (let s = 0; s < strikes; s++) {
-          const t = now + (s * 0.068);
-          const bufferSize = Math.floor(audioCtx.sampleRate * 0.02);
-          const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-          const data = noiseBuffer.getChannelData(0);
-          for (let i = 0; i < bufferSize; i++) {
-            data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.25));
-          }
+  function playMetallicClack(intensity) {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const now = audioCtx.currentTime;
+      const strikes = intensity === 2 ? 2 : 1;
 
-          const noise = audioCtx.createBufferSource();
-          noise.buffer = noiseBuffer;
-          const filter = audioCtx.createBiquadFilter();
-          filter.type = 'bandpass';
-          filter.frequency.setValueAtTime(intensity === 0 ? 3200 : (intensity === 1 ? 2200 : 1750), t);
-          filter.Q.setValueAtTime(4.5, t);
-
-          const noiseGain = audioCtx.createGain();
-          noiseGain.gain.setValueAtTime(intensity === 0 ? 0.35 : 0.75, t);
-          noiseGain.gain.exponentialRampToValueAtTime(0.001, t + 0.022);
-
-          noise.connect(filter);
-          filter.connect(noiseGain);
-          noiseGain.connect(audioCtx.destination);
-          noise.start(t);
-
-          let partials = [1480, 3190];
-          if (intensity === 1) partials = [980, 2110];
-          if (intensity === 2) partials = [720, 1590];
-
-          partials.forEach((freq, idx) => {
-            const osc = audioCtx.createOscillator();
-            const pGain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, t);
-            pGain.gain.setValueAtTime((intensity === 0 ? 0.08 : 0.16) / (idx + 1), t);
-            pGain.gain.exponentialRampToValueAtTime(0.0008, t + 0.045);
-            osc.connect(pGain);
-            pGain.connect(audioCtx.destination);
-            osc.start(t);
-            osc.stop(t + 0.05);
-          });
+      for (let s = 0; s < strikes; s++) {
+        const t = now + (s * 0.068);
+        const bufferSize = Math.floor(audioCtx.sampleRate * 0.02);
+        const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const data = noiseBuffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.25));
         }
-      } catch (e) {}
-    }
 
-    function drawPranchaGeometry() {
-      const svgNS = "http://www.w3.org/2000/svg";
-      const orbitLayer = document.getElementById('orbitLayer');
-      orbitLayer.innerHTML = '';
-      const cx = 340, cy = 315, radius = 190;
+        const noise = audioCtx.createBufferSource();
+        noise.buffer = noiseBuffer;
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(intensity === 0 ? 3200 : (intensity === 1 ? 2200 : 1750), t);
+        filter.Q.setValueAtTime(4.5, t);
 
-      const orbitCircle = document.createElementNS(svgNS, "circle");
-      orbitCircle.setAttribute("cx", cx);
-      orbitCircle.setAttribute("cy", cy);
-      orbitCircle.setAttribute("r", radius);
-      orbitCircle.setAttribute("fill", "none");
-      orbitCircle.setAttribute("stroke", "#3d2d1a");
-      orbitCircle.setAttribute("stroke-width", "1");
-      orbitCircle.setAttribute("stroke-dasharray", "3,4");
-      orbitLayer.appendChild(orbitCircle);
+        const noiseGain = audioCtx.createGain();
+        noiseGain.gain.setValueAtTime(intensity === 0 ? 0.35 : 0.75, t);
+        noiseGain.gain.exponentialRampToValueAtTime(0.001, t + 0.022);
 
-      const domainStep = (2 * Math.PI) / 7;
+        noise.connect(filter);
+        filter.connect(noiseGain);
+        noiseGain.connect(audioCtx.destination);
+        noise.start(t);
 
-      domainsData.forEach((domain, dIdx) => {
-        const domainAngle = -Math.PI / 2 + (dIdx * domainStep);
-        const dx = cx + radius * Math.cos(domainAngle);
-        const dy = cy + radius * Math.sin(domainAngle);
+        let partials = Array.of(1480, 3190);
+        if (intensity === 1) partials = Array.of(980, 2110);
+        if (intensity === 2) partials = Array.of(720, 1590);
 
-        // Linha radial conectando o núcleo ao nó do domínio
-        const spokeLine = document.createElementNS(svgNS, "line");
-        spokeLine.setAttribute("x1", cx);
-        spokeLine.setAttribute("y1", cy);
-        spokeLine.setAttribute("x2", dx);
-        spokeLine.setAttribute("y2", dy);
-        spokeLine.setAttribute("stroke", "rgba(92, 70, 40, 0.35)");
-        spokeLine.setAttribute("stroke-width", "1");
-        orbitLayer.appendChild(spokeLine);
-
-        const dCircle = document.createElementNS(svgNS, "circle");
-        dCircle.setAttribute("id", "dom-circle-" + domain.id);
-        dCircle.setAttribute("cx", dx);
-        dCircle.setAttribute("cy", dy);
-        dCircle.setAttribute("r", "22");
-        dCircle.setAttribute("fill", "#140f0c");
-        dCircle.setAttribute("stroke", "#d4af37");
-        dCircle.setAttribute("stroke-width", "2");
-        orbitLayer.appendChild(dCircle);
-
-        const labelRadius = radius + 36;
-        const lx = cx + labelRadius * Math.cos(domainAngle);
-        const ly = cy + labelRadius * Math.sin(domainAngle);
-        const cosVal = Math.cos(domainAngle);
-        let anchor = "middle";
-        if (cosVal > 0.25) anchor = "start";
-        else if (cosVal < -0.25) anchor = "end";
-
-        const dLabel = document.createElementNS(svgNS, "text");
-        dLabel.setAttribute("x", lx);
-        dLabel.setAttribute("y", ly);
-        dLabel.setAttribute("fill", "#d4af37");
-        dLabel.setAttribute("font-size", "10.5");
-        dLabel.setAttribute("font-weight", "bold");
-        dLabel.setAttribute("letter-spacing", "0.8");
-        dLabel.setAttribute("text-anchor", anchor);
-        dLabel.setAttribute("dominant-baseline", "middle");
-        dLabel.textContent = domain.shortName;
-        orbitLayer.appendChild(dLabel);
-
-        const dScore = document.createElementNS(svgNS, "text");
-        dScore.setAttribute("id", "dom-score-svg-" + domain.id);
-        dScore.setAttribute("x", dx);
-        dScore.setAttribute("y", dy + 1);
-        dScore.setAttribute("fill", "#f2ece4");
-        dScore.setAttribute("font-size", "11");
-        dScore.setAttribute("font-weight", "bold");
-        dScore.setAttribute("text-anchor", "middle");
-        dScore.setAttribute("dominant-baseline", "middle");
-        dScore.textContent = "0/6";
-        orbitLayer.appendChild(dScore);
-
-        const groupOffsets = [0.30, 0.50, 0.70];
-
-        domain.questions.forEach((q, qIdx) => {
-          const qAngle = domainAngle + (groupOffsets[qIdx] * domainStep);
-          const qx = cx + radius * Math.cos(qAngle);
-          const qy = cy + radius * Math.sin(qAngle);
-
-          const qCircle = document.createElementNS(svgNS, "circle");
-          qCircle.setAttribute("id", "cav-" + q.id);
-          qCircle.setAttribute("cx", qx);
-          qCircle.setAttribute("cy", qy);
-          qCircle.setAttribute("r", "8.5");
-          qCircle.setAttribute("fill", "url(#gradEmpty)");
-          qCircle.setAttribute("stroke", "#5c4628");
-          qCircle.setAttribute("stroke-width", "1.4");
-          orbitLayer.appendChild(qCircle);
-
-          const qNum = document.createElementNS(svgNS, "text");
-          qNum.setAttribute("id", "cav-txt-" + q.id);
-          qNum.setAttribute("x", qx);
-          qNum.setAttribute("y", qy + 0.5);
-          qNum.setAttribute("fill", "#7d6d5d");
-          qNum.setAttribute("font-size", "7.5");
-          qNum.setAttribute("font-weight", "bold");
-          qNum.setAttribute("text-anchor", "middle");
-          qNum.setAttribute("dominant-baseline", "middle");
-          qNum.textContent = q.id;
-          orbitLayer.appendChild(qNum);
+        partials.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const pGain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, t);
+          pGain.gain.setValueAtTime((intensity === 0 ? 0.08 : 0.16) / (idx + 1), t);
+          pGain.gain.exponentialRampToValueAtTime(0.0008, t + 0.045);
+          osc.connect(pGain);
+          pGain.connect(audioCtx.destination);
+          osc.start(t);
+          osc.stop(t + 0.05);
         });
+      }
+    } catch (e) {}
+  }
+
+  function drawPranchaGeometry() {
+    const orbitLayer = document.getElementById('orbitLayer');
+    orbitLayer.innerHTML = '';
+    const cx = 340, cy = 315, radius = 190;
+
+    const orbitCircle = document.createElementNS(SVG_NS, "circle");
+    orbitCircle.setAttribute("cx", cx);
+    orbitCircle.setAttribute("cy", cy);
+    orbitCircle.setAttribute("r", radius);
+    orbitCircle.setAttribute("fill", "none");
+    orbitCircle.setAttribute("stroke", "#3d2d1a");
+    orbitCircle.setAttribute("stroke-width", "1");
+    orbitCircle.setAttribute("stroke-dasharray", "3,4");
+    orbitLayer.appendChild(orbitCircle);
+
+    const domainStep = (2 * Math.PI) / 7;
+
+    domainsData.forEach((domain, dIdx) => {
+      const domainAngle = -Math.PI / 2 + (dIdx * domainStep);
+      const dx = cx + radius * Math.cos(domainAngle);
+      const dy = cy + radius * Math.sin(domainAngle);
+
+      const dCircle = document.createElementNS(SVG_NS, "circle");
+      dCircle.setAttribute("id", "dom-circle-" + domain.id);
+      dCircle.setAttribute("cx", dx);
+      dCircle.setAttribute("cy", dy);
+      dCircle.setAttribute("r", "22");
+      dCircle.setAttribute("fill", "#140f0c");
+      dCircle.setAttribute("stroke", "#d4af37");
+      dCircle.setAttribute("stroke-width", "2");
+      orbitLayer.appendChild(dCircle);
+
+      const labelRadius = radius + 36;
+      const lx = cx + labelRadius * Math.cos(domainAngle);
+      const ly = cy + labelRadius * Math.sin(domainAngle);
+      const cosVal = Math.cos(domainAngle);
+      let anchor = "middle";
+      if (cosVal > 0.25) anchor = "start";
+      else if (cosVal < -0.25) anchor = "end";
+
+      const dLabel = document.createElementNS(SVG_NS, "text");
+      dLabel.setAttribute("x", lx);
+      dLabel.setAttribute("y", ly);
+      dLabel.setAttribute("fill", "#d4af37");
+      dLabel.setAttribute("font-size", "10.5");
+      dLabel.setAttribute("font-weight", "bold");
+      dLabel.setAttribute("letter-spacing", "0.8");
+      dLabel.setAttribute("text-anchor", anchor);
+      dLabel.setAttribute("dominant-baseline", "middle");
+      dLabel.textContent = domain.shortName;
+      orbitLayer.appendChild(dLabel);
+
+      const dScore = document.createElementNS(SVG_NS, "text");
+      dScore.setAttribute("id", "dom-score-svg-" + domain.id);
+      dScore.setAttribute("x", dx);
+      dScore.setAttribute("y", dy + 1);
+      dScore.setAttribute("fill", "#f2ece4");
+      dScore.setAttribute("font-size", "11");
+      dScore.setAttribute("font-weight", "bold");
+      dScore.setAttribute("text-anchor", "middle");
+      dScore.setAttribute("dominant-baseline", "middle");
+      dScore.textContent = "0/6";
+      orbitLayer.appendChild(dScore);
+
+      const groupOffsets = Array.of(0.30, 0.50, 0.70);
+
+      domain.questions.forEach((q, qIdx) => {
+        const qAngle = domainAngle + (groupOffsets.at(qIdx) * domainStep);
+        const qx = cx + radius * Math.cos(qAngle);
+        const qy = cy + radius * Math.sin(qAngle);
+
+        const qCircle = document.createElementNS(SVG_NS, "circle");
+        qCircle.setAttribute("id", "cav-" + q.id);
+        qCircle.setAttribute("cx", qx);
+        qCircle.setAttribute("cy", qy);
+        qCircle.setAttribute("r", "8.5");
+        qCircle.setAttribute("fill", "url(#gradEmpty)");
+        qCircle.setAttribute("stroke", "#5c4628");
+        qCircle.setAttribute("stroke-width", "1.4");
+        orbitLayer.appendChild(qCircle);
+
+        const qNum = document.createElementNS(SVG_NS, "text");
+        qNum.setAttribute("id", "cav-txt-" + q.id);
+        qNum.setAttribute("x", qx);
+        qNum.setAttribute("y", qy + 0.5);
+        qNum.setAttribute("fill", "#7d6d5d");
+        qNum.setAttribute("font-size", "7.5");
+        qNum.setAttribute("font-weight", "bold");
+        qNum.setAttribute("text-anchor", "middle");
+        qNum.setAttribute("dominant-baseline", "middle");
+        qNum.textContent = q.id;
+        orbitLayer.appendChild(qNum);
       });
-    }
+    });
+  }
 
-    function initUI() {
-      drawPranchaGeometry();
-      const qContainer = document.getElementById('questionsContainer');
-      qContainer.innerHTML = '';
+  function initUI() {
+    drawPranchaGeometry();
+    const qContainer = document.getElementById('questionsContainer');
+    qContainer.innerHTML = '';
 
-      domainsData.forEach(domain => {
-        const cardDiv = document.createElement('div');
-        cardDiv.className = 'domain-card';
-        let questionsHTML = '';
+    domainsData.forEach(domain => {
+      const cardDiv = document.createElement('div');
+      cardDiv.className = 'domain-card';
 
-        domain.questions.forEach(q => {
-          const hintHTML = q.hint ? '<div class="q-hint">' + q.hint + '</div>' : '';
-          questionsHTML +=
-            '<div class="question-item">' +
-              '<div class="q-text">' + q.text + '</div>' +
-              hintHTML +
-              '<div class="options-group">' +
-                '<button type="button" id="btn-' + q.id + '-0" class="opt-btn" onclick="selectAnswer(' + q.id + ', 0, ' + domain.id + ')">RARO (Dourada • 0)</button>' +
-                '<button type="button" id="btn-' + q.id + '-1" class="opt-btn" onclick="selectAnswer(' + q.id + ', 1, ' + domain.id + ')">ÀS VEZES (Prateada • 1)</button>' +
-                '<button type="button" id="btn-' + q.id + '-2" class="opt-btn" onclick="selectAnswer(' + q.id + ', 2, ' + domain.id + ')">SEMPRE (Ferro Escuro • 2)</button>' +
-              '</div>' +
-            '</div>';
-        });
+      const headerDiv = document.createElement('div');
+      headerDiv.className = 'domain-header';
+      const h2 = document.createElement('h2');
+      h2.textContent = domain.name;
+      const badge = document.createElement('span');
+      badge.className = 'domain-badge';
+      badge.id = 'badge-' + domain.id;
+      badge.textContent = 'Aguardando';
+      headerDiv.appendChild(h2);
+      headerDiv.appendChild(badge);
+      cardDiv.appendChild(headerDiv);
 
-        cardDiv.innerHTML =
-          '<div class="domain-header">' +
-            '<h2>' + domain.name + ' <span style="font-size:0.8rem; color:#a6998a; font-weight:400;">— ' + domain.subtitle + '</span></h2>' +
-            '<span id="badge-' + domain.id + '" class="domain-badge">Aguardando</span>' +
-          '</div>' +
-          questionsHTML;
+      domain.questions.forEach(q => {
+        const qItem = document.createElement('div');
+        qItem.className = 'question-item';
 
-        qContainer.appendChild(cardDiv);
-      });
-    }
+        const qText = document.createElement('div');
+        qText.className = 'q-text';
+        qText.textContent = q.text;
+        qItem.appendChild(qText);
 
-    function selectAnswer(qId, value, domainId, silent = false) {
-      answers['q' + qId] = value;
-      if (!silent) playMetallicClack(value);
+        if (q.hint) {
+          const qHint = document.createElement('div');
+          qHint.className = 'q-hint';
+          qHint.textContent = q.hint;
+          qItem.appendChild(qHint);
+        }
 
-      for (let opt = 0; opt <= 2; opt++) {
-        const btn = document.getElementById('btn-' + qId + '-' + opt);
-        if (btn) {
+        const optGroup = document.createElement('div');
+        optGroup.className = 'options-group';
+
+        const labels = Array.of('RARO (Dourada • 0)', 'ÀS VEZES (Prateada • 1)', 'SEMPRE (Ferro Escuro • 2)');
+        labels.forEach((lbl, val) => {
+          const btn = document.createElement('button');
           btn.className = 'opt-btn';
-          if (opt === value) btn.classList.add('selected-' + value);
-        }
-      }
-
-      const cavCircle = document.getElementById('cav-' + qId);
-      const cavTxt = document.getElementById('cav-txt-' + qId);
-      if (cavCircle && cavTxt) {
-        if (value === 0) {
-          cavCircle.setAttribute("fill", "url(#gradGold)");
-          cavCircle.setAttribute("stroke", "#fff0a8");
-          cavTxt.setAttribute("fill", "#120e0b");
-        } else if (value === 1) {
-          cavCircle.setAttribute("fill", "url(#gradSilver)");
-          cavCircle.setAttribute("stroke", "#ffffff");
-          cavTxt.setAttribute("fill", "#120e0b");
-        } else {
-          cavCircle.setAttribute("fill", "url(#gradIron)");
-          cavCircle.setAttribute("stroke", "#c93b2b");
-          cavTxt.setAttribute("fill", "#f2ece4");
-        }
-      }
-      updateBoardState();
-    }
-
-    // Régua: 0-2 Soberania | 3-4 Inerte | 5-6 Caos
-    function updateBoardState() {
-      document.getElementById('progressText').innerText = Object.keys(answers).length + ' / 21 Cavidades';
-      let runningTotal = 0;
-
-      domainsData.forEach(domain => {
-        let domainSum = 0;
-        domain.questions.forEach(q => {
-          if (answers['q' + q.id] !== undefined) domainSum += answers['q' + q.id];
+          btn.id = 'btn-' + q.id + '-' + val;
+          btn.textContent = lbl;
+          btn.onclick = () => selectAnswer(q.id, val, domain.id);
+          optGroup.appendChild(btn);
         });
-        runningTotal += domainSum;
 
-        const badgeEl = document.getElementById('badge-' + domain.id);
-        const domCircle = document.getElementById('dom-circle-' + domain.id);
-        const domScoreSvg = document.getElementById('dom-score-svg-' + domain.id);
-
-        badgeEl.className = 'domain-badge';
-        if (domScoreSvg) domScoreSvg.textContent = domainSum + '/6';
-
-        if (domainSum <= 2) {
-          badgeEl.classList.add('status-0');
-          badgeEl.innerText = 'Soberania (' + domainSum + '/6)';
-          if (domCircle) domCircle.setAttribute("stroke", "#d4af37");
-        } else if (domainSum <= 4) {
-          badgeEl.classList.add('status-1');
-          badgeEl.innerText = 'Inerte (' + domainSum + '/6)';
-          if (domCircle) domCircle.setAttribute("stroke", "#cbd5e1");
-        } else {
-          badgeEl.classList.add('status-2');
-          badgeEl.innerText = 'Estado de Caos (' + domainSum + '/6)';
-          if (domCircle) domCircle.setAttribute("stroke", "#c93b2b");
-        }
+        qItem.appendChild(optGroup);
+        cardDiv.appendChild(qItem);
       });
 
-      const pct = Math.round((runningTotal / 42) * 100);
-      const centerScore = document.getElementById('centerScoreText');
-      const centerPct = document.getElementById('centerPercentText');
-      if (centerScore) centerScore.textContent = runningTotal + '/42';
-      if (centerPct) centerPct.textContent = pct + '%';
+      qContainer.appendChild(cardDiv);
+    });
+  }
+
+  function selectAnswer(qId, value, domainId, silent = false) {
+    answers['q' + qId] = value;
+    if (!silent) playMetallicClack(value);
+
+    for (let opt = 0; opt <= 2; opt++) {
+      const btn = document.getElementById('btn-' + qId + '-' + opt);
+      if (btn) {
+        btn.className = 'opt-btn';
+        if (opt === value) btn.classList.add('selected-' + value);
+      }
     }
 
-    function runSimulation() {
-      playMetallicClack(2);
-      const archetypes = [
-        "Caso Relacionamento & Limites",
-        "Caso Finanças & Impulso",
-        "Caso Saúde & Vitalidade",
-        "Caso Dual (Afetivo + Caixa)",
-        "Caso Estagnação (Sem Caos 5-6)",
-        "Caso Sobrecarga Geral"
-      ];
-      const randomArch = archetypes[Math.floor(Math.random() * archetypes.length)];
-      document.getElementById('consulenteName').value = randomArch + ' (#' + Math.floor(1000 + Math.random() * 8999) + ')';
-
-      const domainWeights = {};
-      for (let d = 1; d <= 7; d++) domainWeights[d] = Math.random();
-
-      for (let qId = 1; qId <= 21; qId++) {
-        const domainId = Math.ceil(qId / 3);
-        const w = domainWeights[domainId], r = Math.random();
-        let val = 0;
-        if (w > 0.72) {
-          val = r < 0.72 ? 2 : (r < 0.94 ? 1 : 0);
-        } else if (w > 0.42) {
-          val = r < 0.65 ? 1 : (r < 0.85 ? 2 : 0);
-        } else {
-          val = r < 0.72 ? 0 : (r < 0.94 ? 1 : 2);
-        }
-        selectAnswer(qId, val, domainId, true);
-      }
-      generateReport();
-    }
-
-    function resetBoard() {
-      answers = {};
-      document.getElementById('consulenteName').value = '';
-      document.getElementById('resultsSection').style.display = 'none';
-      initUI();
-      updateBoardState();
-    }
-
-    // Termômetro Minucioso em 5 Faixas
-    function getThermometerAnalysis(pct) {
-      if (pct <= 20) {
-        return {
-          band: "0% a 20% • SOBERANIA CONSOLIDADA (Baixíssima Resistência)",
-          color: "#f3d576",
-          arg: "Seu campo está limpo e com alta tração. Existem oscilações humanas normais, mas nenhum vazamento estrutural drenando sua energia."
-        };
-      }
-      if (pct <= 38) {
-        return {
-          band: "21% a 38% • SOBERANIA COM OSCILAÇÃO LEVE (Alerta Preventivo)",
-          color: "#cbd5e1",
-          arg: "Você ainda mantém o controle das rédeas, mas já existem pequenos ralos acumulando tensão silenciosa. Um ajuste agora impede bloqueios futuros."
-        };
-      }
-      if (pct <= 56) {
-        return {
-          band: "39% a 56% • ZONA DE INÉRCIA / REPRESA CHEIA (Estagnação)",
-          color: "#cbd5e1",
-          arg: "O organismo está rodando com o freio de mão puxado. Muita energia gasta no dia a dia para pouco avanço prático, gerando cansaço e sensação de andar em círculos."
-        };
-      }
-      if (pct <= 74) {
-        return {
-          band: "57% a 74% • DRENAGEM CRÍTICA ATIVA (Foco de Corte Urgente)",
-          color: "#ff9c94",
-          arg: "Há uma hemorragia ativa nesse eixo principal. Enquanto você não estancar esse vazamento específico, qualquer esforço nas outras áreas continuará sendo sugado."
-        };
-      }
-      return {
-        band: "75% a 100% • SOBRECARGA SISTÊMICA (Múltiplos Eixos Pressionados)",
-        color: "#ff9c94",
-        arg: "O sistema entrou em modo de defesa e sobrecarga. Não tente resolver tudo de uma vez — isole apenas o foco principal para devolver fôlego e clareza primeiro."
-      };
-    }
-
-    // 1 Foco Único no Topo + 3 Relações/Hipóteses + Nota de Dualidade Separada
-    function analyzeTerritoryAndRelations(scores, totalIGF) {
-      const relScore = scores['d5'] + scores['d7'];    // Coração + Esqueleto
-      const finScore = scores['d2'] + scores['d6'];    // Pés + Ventre
-      const healthScore = scores['d3'] + scores['d1']; // Pulmões + Cabeça
-      const throatScore = scores['d4'];                // Garganta (Amplificador dos 3)
-
-      const areas = [
-        { key: "REL", title: "RELACIONAMENTO & VÍNCULOS", score: relScore, axis: "Eixo Coração + Esqueleto" },
-        { key: "FIN", title: "FINANÇAS & MATERIAL", score: finScore, axis: "Eixo Pés + Ventre" },
-        { key: "HEA", title: "SAÚDE & VITALIDADE", score: healthScore, axis: "Eixo Pulmões + Cabeça" }
-      ].sort((a, b) => b.score - a.score);
-
-      const primary = areas[0];
-      const secondary = areas[1];
-
-      const throatNote = throatScore >= 3
-        ? " Amplificado pela Garganta (" + throatScore + "/6): conflitos verbais, engolir sapos ou falta de posicionamento estão agravando diretamente esse quadro."
-        : "";
-
-      if (totalIGF <= 12) {
-        return {
-          isSovereign: true,
-          title: "TERRITÓRIO EM SOBERANIA ATIVA",
-          sub: "Nenhum eixo crítico pressionado • Campo alinhado para expansão",
-          relations: [
-            "1. Coerência Interna: Seus eixos centrais operam sem vazamentos graves.",
-            "2. Tração na Matéria: A energia mental e emocional está disponível para projetos e vínculos.",
-            "3. Preservação de Limites: Mantenha o ritmo atual para consolidar resultados."
-          ],
-          dualityNote: ""
-        };
-      }
-
-      let subText = primary.axis + " acusando o maior desgaste." + throatNote;
-      let relList = [];
-
-      if (primary.key === "REL") {
-        relList = [
-          "Relação 1 — Apego vs. Medo do Vazio (Coração + Esqueleto): A dificuldade de encerrar ciclos que já morreram faz a pessoa aceitar migalhas afetivas e depender da reação do outro para sentir valor próprio.",
-          "Relação 2 — Engolir Sapos vs. Explosão (Coração + Garganta): Por medo de perder o vínculo ou desagradar, silencia o que incomoda até acumular mágoa e explodir em discussões que geram arrependimento.",
-          "Relação 3 — Drenagem de Energia Vital (Vínculos -> Todo): O desgaste constante nas relações próximas está roubando a lucidez e o fôlego que deveriam ir para a sua vida pessoal e profissional."
-        ];
-      } else if (primary.key === "FIN") {
-        relList = [
-          "Relação 1 — Esforço sem Acabativa vs. Ralo Invisível (Pés + Cabeça): Trabalha até a exaustão, mas abre frentes demais sem concluir ou hesita nas decisões-chave, fazendo o esforço não virar retenção de caixa.",
-          "Relação 2 — Ansiedade vs. Compensação Impulsiva (Ventre + Pés): Toda vez que surge frustração ou pressão de resultado, o impulso busca alívio imediato (gastos por compensação ou decisões precipitadas), furando o orçamento.",
-          "Relação 3 — Posicionamento e Acordos (Finanças + Garganta): A pressa para fechar compromissos ou a dificuldade de sustentar o próprio valor nas negociações está gerando perda de recursos."
-        ];
+    const cavCircle = document.getElementById('cav-' + qId);
+    const cavTxt = document.getElementById('cav-txt-' + qId);
+    if (cavCircle && cavTxt) {
+      if (value === 0) {
+        cavCircle.setAttribute("fill", "url(#gradGold)");
+        cavCircle.setAttribute("stroke", "#fff0a8");
+        cavTxt.setAttribute("fill", "#120e0b");
+      } else if (value === 1) {
+        cavCircle.setAttribute("fill", "url(#gradSilver)");
+        cavCircle.setAttribute("stroke", "#ffffff");
+        cavTxt.setAttribute("fill", "#120e0b");
       } else {
-        relList = [
-          "Relação 1 — Hipervigilância vs. Exaustão Mental (Pulmões + Cabeça): Viver armado em estado de alerta e desconfiança mantém a mente acelerada 24 horas por dia, gerando insônia, névoa mental e sensação de aperto no peito.",
-          "Relação 2 — Peso Carregado vs. Tensão Física (Pulmões + Esqueleto): Carregar culpas, mágoas antigas ou responsabilidades que não são suas se manifesta no corpo como cansaço crônico, falta de fôlego e rigidez.",
-          "Relação 3 — Verdades Engolidas vs. Sobrecarga (Vitalidade + Garganta): Reprimir o que sente e não colocar limites claros no dia a dia mantém o sistema nervoso tensionado e drena sua disposição física."
-        ];
+        cavCircle.setAttribute("fill", "url(#gradIron)");
+        cavCircle.setAttribute("stroke", "#c93b2b");
+        cavTxt.setAttribute("fill", "#f2ece4");
       }
-
-      let dualityText = "";
-      if (secondary.score >= 5 && (primary.score - secondary.score) <= 2) {
-        dualityText = "⚖️ Nota de Dualidade para o Operador: O eixo " + secondary.title + " (" + secondary.axis + " — " + secondary.score + "/12 pts) também está fortemente pressionado. Avalie na conversa como o desgaste de " + primary.title + " está drenando diretamente " + secondary.title + ".";
-      }
-
-      return {
-        isSovereign: false,
-        title: primary.title,
-        sub: subText,
-        relations: relList,
-        dualityNote: dualityText
-      };
     }
+    updateBoardState();
+  }
 
-    function generateReport() {
-      if (Object.keys(answers).length < 21) {
-        showToast("Preencha todas as 21 cavidades da Prancha antes de revelar o Raio-X.");
-        return;
-      }
+  function updateBoardState() {
+    document.getElementById('progressText').innerText = Object.keys(answers).length + ' / 21 Cavidades';
+    let runningTotal = 0;
 
-      playMetallicClack(2);
-      const name = document.getElementById('consulenteName').value.trim() || "Consulente";
-      let totalIGF = 0, sulfurVertical = 0, mercuryVertical = 0, saltVertical = 0;
-      const domainScores = {}, signatureParts = [];
-      let chaosCount = 0;
-
-      domainsData.forEach(d => {
-        let sum = 0, subSig = "";
-        d.questions.forEach((q, idx) => {
-          const v = answers['q' + q.id];
-          sum += v;
-          subSig += v;
-          if (idx === 0) sulfurVertical += v;
-          if (idx === 1) mercuryVertical += v;
-          if (idx === 2) saltVertical += v;
-        });
-        domainScores['d' + d.id] = sum;
-        if (sum >= 5) chaosCount++;
-        totalIGF += sum;
-        signatureParts.push(subSig);
+    domainsData.forEach(domain => {
+      let domainSum = 0;
+      domain.questions.forEach(q => {
+        if (answers['q' + q.id] !== undefined) domainSum += answers['q' + q.id];
       });
+      runningTotal += domainSum;
 
-      // Cálculo Minucioso da Porcentagem de Drenagem Global (Base + Cristalização + Atrito)
-      const basePct = (totalIGF / 42) * 100;
-      const chaosBonus = chaosCount * 4;
-      const dualFriction = ((domainScores['d5'] + domainScores['d7'] >= 7) && (domainScores['d2'] + domainScores['d6'] >= 7)) ? 3 : 0;
-      const finalPct = Math.min(100, Math.round(basePct + chaosBonus + dualFriction));
+      const badgeEl = document.getElementById('badge-' + domain.id);
+      const domCircle = document.getElementById('dom-circle-' + domain.id);
+      const domScoreSvg = document.getElementById('dom-score-svg-' + domain.id);
 
-      // 1. Preenche Bloco 1: Onde Está Acusando a Dor
-      const analysis = analyzeTerritoryAndRelations(domainScores, totalIGF);
-      const painCard = document.getElementById('painCard');
-      const painTag = document.getElementById('painTag');
-      if (analysis.isSovereign) {
-        painCard.className = "pain-hero-card sovereign-mode";
-        painTag.className = "pain-tag gold-tag";
-        painTag.innerText = "👑 ESTADO GERAL DO ORGANISMO";
+      badgeEl.className = 'domain-badge';
+      if (domScoreSvg) domScoreSvg.textContent = domainSum + '/6';
+
+      if (domainSum <= 2) {
+        badgeEl.classList.add('status-0');
+        badgeEl.innerText = 'Soberania (' + domainSum + '/6)';
+        if (domCircle) domCircle.setAttribute("stroke", "#d4af37");
+      } else if (domainSum <= 4) {
+        badgeEl.classList.add('status-1');
+        badgeEl.innerText = 'Inerte (' + domainSum + '/6)';
+        if (domCircle) domCircle.setAttribute("stroke", "#cbd5e1");
       } else {
-        painCard.className = "pain-hero-card";
-        painTag.className = "pain-tag";
-        painTag.innerText = "🎯 ONDE ESTÁ ACUSANDO A DOR PRINCIPAL";
+        badgeEl.classList.add('status-2');
+        badgeEl.innerText = 'Estado de Caos (' + domainSum + '/6)';
+        if (domCircle) domCircle.setAttribute("stroke", "#c93b2b");
       }
-      document.getElementById('painTitle').innerText = analysis.title;
-      document.getElementById('painSub').innerText = analysis.sub;
+    });
 
-      // 2. Preenche Bloco 2: Termômetro Minucioso de Porcentagem
-      const thermo = getThermometerAnalysis(finalPct);
-      document.getElementById('thermoPct').innerText = finalPct + '%';
-      const bandEl = document.getElementById('thermoBand');
-      bandEl.innerText = thermo.band;
-      bandEl.style.color = thermo.color;
-      document.getElementById('thermoBarFill').style.width = finalPct + '%';
-      document.getElementById('thermoArg').innerText = thermo.arg;
-      document.getElementById('thermoMeta').innerText =
-        'IGF Bruto: ' + totalIGF + '/42 | Assinatura da Matriz: ' + signatureParts.join('-');
+    const pct = Math.round((runningTotal / 42) * 100);
+    const centerScore = document.getElementById('centerScoreText');
+    const centerPct = document.getElementById('centerPercentText');
+    if (centerScore) centerScore.textContent = runningTotal + '/42';
+    if (centerPct) centerPct.textContent = pct + '%';
+  }
 
-      // 3. Preenche Bloco 3: As 3 Relações / Hipóteses + Nota de Dualidade
-      document.getElementById('relationsList').innerHTML = analysis.relations.map(r => '<li>' + r + '</li>').join('');
-      const dualityBox = document.getElementById('dualityBox');
-      if (analysis.dualityNote) {
-        dualityBox.style.display = 'block';
-        dualityBox.innerHTML = analysis.dualityNote;
+  function runSimulation() {
+    playMetallicClack(2);
+    const archetypes = Array.of(
+      "Caso Relacionamento & Limites",
+      "Caso Finanças & Impulso",
+      "Caso Saúde & Vitalidade",
+      "Caso Dual (Afetivo + Caixa)",
+      "Caso Estagnação (Sem Caos 5-6)",
+      "Caso Sobrecarga Geral"
+    );
+    const randomArch = archetypes.at(Math.floor(Math.random() * archetypes.length));
+    document.getElementById('consulenteName').value = randomArch + ' (#' + Math.floor(1000 + Math.random() * 8999) + ')';
+
+    const domainWeights = {};
+    for (let d = 1; d <= 7; d++) domainWeights[d] = Math.random();
+
+    for (let qId = 1; qId <= 21; qId++) {
+      const domainId = Math.ceil(qId / 3);
+      const w = domainWeights[domainId], r = Math.random();
+      let val = 0;
+      if (w > 0.72) {
+        val = r < 0.72 ? 2 : (r < 0.94 ? 1 : 0);
+      } else if (w > 0.42) {
+        val = r < 0.65 ? 1 : (r < 0.85 ? 2 : 0);
       } else {
-        dualityBox.style.display = 'none';
+        val = r < 0.72 ? 0 : (r < 0.94 ? 1 : 2);
       }
-
-      // 4. Preenche Bloco 4: Lista Limpa dos 7 Domínios
-      const sortedDomains = [...domainsData].sort((a, b) => domainScores['d' + b.id] - domainScores['d' + a.id]);
-      const cleanList = document.getElementById('cleanDomainsList');
-      cleanList.innerHTML = '';
-
-      sortedDomains.forEach((d, idx) => {
-        const s = domainScores['d' + d.id];
-        let cls = 'st-sov', statusText = 'Soberania (0–2)';
-        if (s >= 5) {
-          cls = 'st-chaos';
-          statusText = idx === 0 ? 'ESTADO DE CAOS (5–6) • FOCO PRINCIPAL' : 'ESTADO DE CAOS (5–6)';
-        } else if (s >= 3) {
-          cls = 'st-inert';
-          statusText = 'INERTE (3–4) • REVISÃO';
-        }
-        cleanList.innerHTML +=
-          '<li class="' + cls + '">' +
-            '<span><strong>' + d.name + '</strong> (' + d.subtitle + ')</span>' +
-            '<span><strong>' + s + '/6</strong> — ' + statusText + '</span>' +
-          '</li>';
-      });
-
-      // 5. Preenche Bloco 5: Telemetria Técnica de Registro na Base
-      const individualLines = domainsData.map(d => {
-        const qStr = d.questions.map(q => 'P' + q.id + '=' + answers['q' + q.id]).join(' | ');
-        return d.name + ' [' + domainScores['d' + d.id] + '/6]: ' + qStr;
-      });
-      document.getElementById('telemetryDetails').innerHTML =
-        'Composição da Porcentagem: Base Bruta (' + Math.round(basePct) + '%) + Cristalização Caos (+' + chaosBonus + '%) + Atrito Cruzado (+' + dualFriction + '%) = ' + finalPct + '%<br>' +
-        'Sobreposição Vertical Tria Prima: Enxofre (1ªs): ' + sulfurVertical + '/14 | Mercúrio (2ªs): ' + mercuryVertical + '/14 | Sal (3ªs): ' + saltVertical + '/14';
-
-      fullExportBuffer =
-        '=== RAIO-X PONTEMETRIA ALQUÍMICA — ' + name.toUpperCase() + ' ===\n' +
-        '1. ONDE ESTÁ ACUSANDO A DOR:\n' +
-        analysis.title + '\n' +
-        analysis.sub + '\n\n' +
-        '2. TERMÔMETRO DE DRENAGEM GLOBAL (REFERÊNCIA DE RETORNO):\n' +
-        'Índice: ' + finalPct + '% (' + thermo.band + ')\n' +
-        'IGF Bruto: ' + totalIGF + '/42 | Assinatura da Matriz: ' + signatureParts.join('-') + '\n' +
-        'Leitura: ' + thermo.arg + '\n\n' +
-        '3. RELAÇÕES E HIPÓTESES DO EIXO:\n' +
-        document.getElementById('relationsList').innerText + '\n' +
-        (analysis.dualityNote ? '\n' + dualityBox.innerText + '\n' : '') + '\n' +
-        '4. MAPA DOS 7 DOMÍNIOS (0-2 SOBERANIA | 3-4 INERTE | 5-6 CAOS):\n' +
-        document.getElementById('cleanDomainsList').innerText + '\n\n' +
-        '--- TELEMETRIA TÉCNICA (CADERNO 2 / REGISTRO DE RETORNO) ---\n' +
-        'Composição %: Base ' + Math.round(basePct) + '% + Caos +' + chaosBonus + '% + Atrito +' + dualFriction + '% = ' + finalPct + '%\n' +
-        'Tria Prima Vertical: Enxofre=' + sulfurVertical + '/14 | Mercúrio=' + mercuryVertical + '/14 | Sal=' + saltVertical + '/14\n' +
-        individualLines.join('\n') + '\n' +
-        '=========================================================';
-
-      document.getElementById('resultsSection').style.display = 'block';
-      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+      selectAnswer(qId, val, domainId, true);
     }
+    generateReport();
+  }
 
-    // Função de Cópia Blindada
-    function copyUnifiedReport() {
-      if (!fullExportBuffer) {
-        showToast("Gere o Raio-X primeiro antes de copiar.");
-        return;
-      }
-      const btn = document.getElementById('copyBtn');
-      const textArea = document.createElement("textarea");
-      textArea.value = fullExportBuffer;
-      textArea.style.position = "fixed";
-      textArea.style.left = "-9999px";
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      try {
-        document.execCommand('copy');
-        btn.innerText = "✓ RAIO-X E TELEMETRIA COPIADOS!";
-        setTimeout(() => { btn.innerText = "Copiar Raio-X + Telemetria Completa (Caderno 2 / WhatsApp)"; }, 2500);
-      } catch (err) {
-        showToast("Não foi possível copiar automaticamente.");
-      }
-      document.body.removeChild(textArea);
-    }
-
+  function resetBoard() {
+    answers = {};
+    lastCalcData = null;
+    document.getElementById('consulenteName').value = '';
+    document.getElementById('sessionNotes').value = '';
+    document.getElementById('resultsSection').style.display = 'none';
     initUI();
     updateBoardState();
-  </script>
+  }
+
+  function getThermometerAnalysis(pct) {
+    if (pct <= 20) {
+      return {
+        band: "0% a 20% • SOBERANIA CONSOLIDADA (Baixíssima Resistência)",
+        color: "#f3d576",
+        arg: "Seu campo está limpo e com alta tração. Existem oscilações humanas normais, mas nenhum vazamento estrutural drenando sua energia."
+      };
+    }
+    if (pct <= 38) {
+      return {
+        band: "21% a 38% • SOBERANIA COM OSCILAÇÃO LEVE (Alerta Preventivo)",
+        color: "#cbd5e1",
+        arg: "Você ainda mantém o controle das rédeas, mas já existem pequenos ralos acumulando tensão silenciosa. Um ajuste agora impede bloqueios futuros."
+      };
+    }
+    if (pct <= 56) {
+      return {
+        band: "39% a 56% • ZONA DE INÉRCIA / REPRESA CHEIA (Estagnação)",
+        color: "#cbd5e1",
+        arg: "O organismo está rodando com o freio de mão puxado. Muita energia gasta no dia a dia para pouco avanço prático, gerando cansaço e sensação de andar em círculos."
+      };
+    }
+    if (pct <= 74) {
+      return {
+        band: "57% a 74% • DRENAGEM CRÍTICA ATIVA (Foco de Corte Urgente)",
+        color: "#ff9c94",
+        arg: "Há uma hemorragia ativa nesse eixo principal. Enquanto você não estancar esse vazamento específico, qualquer esforço nas outras áreas continuará sendo sugado."
+      };
+    }
+    return {
+      band: "75% a 100% • SOBRECARGA SISTÊMICA (Múltiplos Eixos Pressionados)",
+      color: "#ff9c94",
+      arg: "O sistema entrou em modo de defesa e sobrecarga. Não tente resolver tudo de uma vez — isole apenas o foco principal para devolver fôlego e clareza primeiro."
+    };
+  }
+
+  function buildDynamicSynthesis(scores, totalIGF) {
+    const relScore = scores.d5 + scores.d7;
+    const finScore = scores.d2 + scores.d6;
+    const healthScore = scores.d3 + scores.d1;
+    const throatScore = scores.d4;
+
+    const areas = Array.of(
+      { key: "REL", title: "RELACIONAMENTO & VÍNCULOS", score: relScore, dA: scores.d5, nA: "Coração", dB: scores.d7, nB: "Esqueleto" },
+      { key: "FIN", title: "FINANÇAS & MATERIAL", score: finScore, dA: scores.d2, nA: "Pés", dB: scores.d6, nB: "Ventre" },
+      { key: "HEA", title: "SAÚDE & VITALIDADE", score: healthScore, dA: scores.d3, nA: "Pulmões", dB: scores.d1, nB: "Cabeça" }
+    ).sort((a, b) => b.score - a.score);
+
+    const primary = areas.at(0);
+    const secondary = areas.at(1);
+
+    let activeAxisLabel = "";
+    if (primary.dA > 0 && primary.dB > 0) {
+      activeAxisLabel = "Eixo " + primary.nA + " (" + primary.dA + "/6) + " + primary.nB + " (" + primary.dB + "/6)";
+    } else if (primary.dA > 0) {
+      activeAxisLabel = "Foco Isolado em " + primary.nA + " (" + primary.dA + "/6) — " + primary.nB + " preservado";
+    } else {
+      activeAxisLabel = "Foco Isolado em " + primary.nB + " (" + primary.dB + "/6) — " + primary.nA + " preservado";
+    }
+
+    let confirmItems = [];
+    if (primary.key === "REL") {
+      confirmItems = Array.of(
+        { label: "1. Fato Real (Sem generalizar):", q: `Não me diga 'falta de diálogo'. Qual episódio concreto aconteceu nos últimos 7 dias com seu parceiro(a) ou familiar que deixou você engasgado ou magoado?` },
+        { label: "2. Reação na Hora H:", q: `Naquele exato momento, você engoliu seco para evitar briga, discutiu no impulso ou se afastou esperando o outro adivinhar?` },
+        { label: "3. Histórico (O que já falhou):", q: `Qual atitude você já tentou tomar nesse vínculo antes (cobrar, ceder demais, ameaçar sair) que não mudou nada?` }
+      );
+    } else if (primary.key === "FIN") {
+      confirmItems = Array.of(
+        { label: "1. Fato Real (Sem generalizar):", q: `Não me diga 'o mercado está difícil'. Qual situação concreta de dinheiro, projeto travado ou acordo mal fechado tirou seu sono nos últimos 7 dias?` },
+        { label: "2. Reação na Hora H:", q: `Quando a conta aperta ou o projeto trava, você paralisa calculando demais, abre outra frente nova sem fechar a antiga ou gasta para aliviar a tensão?` },
+        { label: "3. Histórico (O que já falhou):", q: `Qual planilha, meta ou tentativa de organização você já começou antes e abandonou antes de completar 15 dias?` }
+      );
+    } else {
+      confirmItems = Array.of(
+        { label: "1. Fato Real (Sem termos clínicos):", q: `Em qual momento exato do seu dia (ao acordar, no trabalho ou na hora de deitar) o seu corpo acusa aperto no peito, mente acelerada ou exaustão?` },
+        { label: "2. Reação na Hora H:", q: `Quando essa tensão bate, você força o ritmo ignorando o cansaço, fica remoendo cenários na cabeça ou busca alguma distração rápida para anestesiar?` },
+        { label: "3. Histórico (O que já falhou):", q: `O que você já tentou fazer para desacelerar ou dormir melhor que não funcionou porque sua cabeça não desligava?` }
+      );
+    }
+
+    if (totalIGF <= 12) {
+      return {
+        isSovereign: true,
+        title: "TERRITÓRIO EM SOBERANIA ATIVA",
+        sub: "Nenhum eixo crítico pressionado • Campo alinhado para expansão",
+        paragraph: "A leitura mostra coerência entre o que você decide, o que você executa e os limites que você sustenta. Não há drenos abertos; o momento é de consolidar conquistas e expandir seus próximos projetos.",
+        dualityNote: "",
+        confirmItems: confirmItems
+      };
+    }
+
+    let paragraph = "";
+    if (primary.key === "REL") {
+      paragraph = "O cruzamento aponta que o centro de desgaste está na forma como você se vincula e sustenta limites. ";
+      if (scores.d5 >= 3 && scores.d7 >= 3) {
+        paragraph += "A combinação entre apego emocional acelerado (Coração) e dificuldade de encerrar situações já desgastadas (Esqueleto) faz você investir energia onde não há retorno e aceitar menos do que merece por receio do vazio.";
+      } else if (scores.d5 >= 3) {
+        paragraph += "O peso recai sobre o Coração (" + scores.d5 + "/6), indicando que seu humor e segurança interna estão oscilando demais conforme a atenção ou aprovação das pessoas próximas (enquanto o Esqueleto permanece preservado).";
+      } else {
+        paragraph += "O peso recai sobre o Esqueleto (" + scores.d7 + "/6), mostrando retenção de mágoas antigas ou manutenção de vínculos que já cumpriram seu ciclo.";
+      }
+    } else if (primary.key === "FIN") {
+      paragraph = "O cruzamento revela que a energia vital está vazando na execução prática e na retenção de recursos. ";
+      if (scores.d2 >= 3 && scores.d6 >= 3) {
+        paragraph += "Enquanto os Pés acusam esforço sem acabativa e dinheiro escorrendo, o Ventre mostra impulsividade e busca por compensações imediatas que furam o planejamento e sabotam o caixa.";
+      } else if (scores.d2 >= 3) {
+        paragraph += "O gargalo está concentrado nos Pés (" + scores.d2 + "/6): excesso de movimento sem fechamento de ciclos, gerando cansaço produtivo sem acúmulo material correspondente.";
+      } else {
+        paragraph += "O gargalo está concentrado no Ventre (" + scores.d6 + "/6): decisões precipitadas sob pressão e consumo usado como válvula de escape emocional.";
+      }
+    } else {
+      paragraph = "O cruzamento indica sobrecarga na vitalidade física e no ritmo do sistema nervoso (desgaste energético e tensão acumulada, sem conotação clínica). ";
+      if (scores.d3 >= 3 && scores.d1 >= 3) {
+        paragraph += "Viver armado em estado de alerta constante (Pulmões) somado ao excesso de cálculo mental e dúvida (Cabeça) está drenando seu fôlego, prejudicando o descanso e gerando aperto no peito e cansaço contínuo.";
+      } else if (scores.d3 >= 3) {
+        paragraph += "O peso está concentrado nos Pulmões (" + scores.d3 + "/6): hipervigilância e dificuldade de baixar a guarda no dia a dia, mantendo o corpo em tensão defensiva.";
+      } else {
+        paragraph += "O peso está concentrado na Cabeça (" + scores.d1 + "/6): fadiga por excesso de antecipação de cenários, dúvida e névoa mental nas horas decisivas (enquanto a fronteira dos Pulmões permanece intacta).";
+      }
+    }
+
+    if (throatScore >= 3) {
+      paragraph += " Além disso, a Garganta elevada (" + throatScore + "/6) mostra que engolir verdades ou reagir verbalmente no impulso está amplificando diretamente esse desgaste.";
+    }
+
+    let dualityText = "";
+    if (secondary.score >= 5 && (primary.score - secondary.score) <= 2) {
+      dualityText = "⚖️ Nota de Dualidade para o Operador: O eixo " + secondary.title + " (" + secondary.score + "/12 pts) também está fortemente pressionado. Pese na conversa como o travamento em " + primary.title + " está drenando diretamente " + secondary.title + ".";
+    }
+
+    return {
+      isSovereign: false,
+      title: primary.title,
+      sub: activeAxisLabel + " concentrando o maior peso da leitura",
+      paragraph: paragraph,
+      dualityNote: dualityText,
+      confirmItems: confirmItems
+    };
+  }
+
+  function generateReport() {
+    if (Object.keys(answers).length < 21) {
+      alert("Preencha todas as 21 cavidades da Prancha antes de revelar o Raio-X.");
+      return;
+    }
+    playMetallicClack(2);
+    let totalIGF = 0, sulfurVertical = 0, mercuryVertical = 0, saltVertical = 0;
+    const domainScores = {}, signatureParts = [];
+    let chaosCount = 0;
+
+    domainsData.forEach(d => {
+      let sum = 0, subSig = "";
+      d.questions.forEach((q, idx) => {
+        const v = answers['q' + q.id];
+        sum += v;
+        subSig += v;
+        if (idx === 0) sulfurVertical += v;
+        if (idx === 1) mercuryVertical += v;
+        if (idx === 2) saltVertical += v;
+      });
+      domainScores['d' + d.id] = sum;
+      if (sum >= 5) chaosCount++;
+      totalIGF += sum;
+      signatureParts.push(subSig);
+    });
+
+    const basePct = (totalIGF / 42) * 100;
+    const chaosBonus = chaosCount * 4;
+    const dualFriction = ((domainScores.d5 + domainScores.d7 >= 7) && (domainScores.d2 + domainScores.d6 >= 7)) ? 3 : 0;
+    const finalPct = Math.min(100, Math.round(basePct + chaosBonus + dualFriction));
+    const synthesis = buildDynamicSynthesis(domainScores, totalIGF);
+
+    const painCard = document.getElementById('painCard');
+    const painTag = document.getElementById('painTag');
+    if (synthesis.isSovereign) {
+      painCard.className = "pain-hero-card sovereign-mode";
+      painTag.className = "pain-tag gold-tag";
+      painTag.innerText = "👑 ESTADO GERAL DO ORGANISMO";
+    } else {
+      painCard.className = "pain-hero-card";
+      painTag.className = "pain-tag";
+      painTag.innerText = "🎯 ONDE ESTÁ ACUSANDO A DOR PRINCIPAL";
+    }
+    document.getElementById('painTitle').innerText = synthesis.title;
+    document.getElementById('painSub').innerText = synthesis.sub;
+
+    const thermo = getThermometerAnalysis(finalPct);
+    document.getElementById('thermoPct').innerText = finalPct + '%';
+    const bandEl = document.getElementById('thermoBand');
+    bandEl.innerText = thermo.band;
+    bandEl.style.color = thermo.color;
+    document.getElementById('thermoBarFill').style.width = finalPct + '%';
+    document.getElementById('thermoArg').innerText = thermo.arg;
+    document.getElementById('thermoMeta').innerText =
+      'IGF Bruto: ' + totalIGF + '/42 | Assinatura da Matriz: ' + signatureParts.join('-');
+
+    document.getElementById('synthesisText').innerText = synthesis.paragraph;
+
+    const confirmBox = document.getElementById('dynamicConfirmQuestions');
+    confirmBox.innerHTML = '';
+    synthesis.confirmItems.forEach(item => {
+      const row = document.createElement('div');
+      const strong = document.createElement('strong');
+      strong.textContent = item.label + ' ';
+      row.appendChild(strong);
+      row.appendChild(document.createTextNode(item.q));
+      confirmBox.appendChild(row);
+    });
+
+    const dualityBox = document.getElementById('dualityBox');
+    if (synthesis.dualityNote) {
+      dualityBox.style.display = 'block';
+      dualityBox.textContent = synthesis.dualityNote;
+    } else {
+      dualityBox.style.display = 'none';
+    }
+
+    const sortedDomains = Array.from(domainsData).sort((a, b) => domainScores['d' + b.id] - domainScores['d' + a.id]);
+    const cleanList = document.getElementById('cleanDomainsList');
+    cleanList.innerHTML = '';
+    sortedDomains.forEach((d, idx) => {
+      const s = domainScores['d' + d.id];
+      let cls = 'st-sov', statusText = 'Soberania (0–2)';
+      if (s >= 5) {
+        cls = 'st-chaos';
+        statusText = idx === 0 ? 'ESTADO DE CAOS (5–6) • FOCO PRINCIPAL' : 'ESTADO DE CAOS (5–6)';
+      } else if (s >= 3) {
+        cls = 'st-inert';
+        statusText = 'INERTE (3–4) • REVISÃO';
+      }
+      const li = document.createElement('li');
+      li.className = cls;
+      const spLeft = document.createElement('span');
+      spLeft.textContent = d.name + ' (' + d.subtitle + ')';
+      const spRight = document.createElement('span');
+      spRight.textContent = s + '/6 — ' + statusText;
+      li.appendChild(spLeft);
+      li.appendChild(spRight);
+      cleanList.appendChild(li);
+    });
+
+    lastCalcData = {
+      totalIGF, finalPct, thermoBand: thermo.band,
+      signature: signatureParts.join('-'),
+      painTitle: synthesis.title,
+      painSub: synthesis.sub,
+      paragraph: synthesis.paragraph,
+      dualityPlain: dualityBox.innerText || "Nenhuma dualidade secundária crítica.",
+      domainScores, sulfurVertical, mercuryVertical, saltVertical,
+      basePct: Math.round(basePct), chaosBonus, dualFriction
+    };
+
+    document.getElementById('resultsSection').style.display = 'block';
+    document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function copyUnifiedReport() {
+    if (!lastCalcData) {
+      alert("Gere o Raio-X primeiro antes de copiar.");
+      return;
+    }
+    const name = document.getElementById('consulenteName').value.trim() || "Consulente";
+    const notes = document.getElementById('sessionNotes').value.trim() || "Nenhuma observação adicional registrada na sessão.";
+    const individualLines = domainsData.map(d => {
+      const qStr = d.questions.map(q => 'P' + q.id + '=' + answers['q' + q.id]).join(' | ');
+      return d.name + ' [' + lastCalcData.domainScores['d' + d.id] + '/6]: ' + qStr;
+    }).join('\n');
+
+    const exportText =
+      '=== RAIO-X PONTEMETRIA ALQUÍMICA — ' + name.toUpperCase() + ' ===\n' +
+      'DOR PRINCIPAL ACUSADA: ' + lastCalcData.painTitle + '\n' +
+      'Eixo: ' + lastCalcData.painSub + '\n\n' +
+      'TERMÔMETRO DE DRENAGEM GLOBAL (REFERÊNCIA DE RETORNO):\n' +
+      'Índice: ' + lastCalcData.finalPct + '% (' + lastCalcData.thermoBand + ')\n' +
+      'IGF Bruto: ' + lastCalcData.totalIGF + '/42 | Assinatura: ' + lastCalcData.signature + '\n\n' +
+      'SÍNTESE CRUZADA:\n' +
+      lastCalcData.paragraph + '\n' +
+      'Dualidade: ' + lastCalcData.dualityPlain + '\n\n' +
+      'ANCORAGEM DE REALIDADE (FATO / REAÇÃO / HISTÓRICO):\n' +
+      notes + '\n\n' +
+      'MAPA DOS 7 DOMÍNIOS (0-2 SOBERANIA | 3-4 INERTE | 5-6 CAOS):\n' +
+      document.getElementById('cleanDomainsList').innerText + '\n\n' +
+      '--- TELEMETRIA TÉCNICA PURA (CADERNO 2 / IA) ---\n' +
+      'Composição %: Base ' + lastCalcData.basePct + '% + Caos +' + lastCalcData.chaosBonus + '% + Atrito +' + lastCalcData.dualFriction + '% = ' + lastCalcData.finalPct + '%\n' +
+      'Tria Prima Vertical: Enxofre=' + lastCalcData.sulfurVertical + '/14 | Mercúrio=' + lastCalcData.mercuryVertical + '/14 | Sal=' + lastCalcData.saltVertical + '/14\n' +
+      individualLines + '\n' +
+      '=========================================================';
+
+    const btn = document.getElementById('copyBtn');
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(exportText).then(() => {
+        btn.innerText = "✓ RAIO-X + ANCORAGEM COPIADOS!";
+        setTimeout(() => { btn.innerText = "Copiar Raio-X + Confirmação para Caderno IA"; }, 2500);
+      }).catch(() => fallbackCopyText(exportText, btn));
+    } else {
+      fallbackCopyText(exportText, btn);
+    }
+  }
+
+  function fallbackCopyText(text, btn) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-9999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      btn.innerText = "✓ RAIO-X + ANCORAGEM COPIADOS!";
+      setTimeout(() => { btn.innerText = "Copiar Raio-X + Confirmação para Caderno IA"; }, 2500);
+    } catch (err) {
+      alert("Não foi possível copiar automaticamente.");
+    }
+    document.body.removeChild(textArea);
+  }
+
+  initUI();
+  updateBoardState();
+</script>
 </body>
 </html>
